@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Project\Domain\Entities;
 
-use App\Modules\Shared\Domain\Enums\StatusEnum;
+use App\Modules\Shared\Domain\Enums\Status;
 
 class Project
 {
@@ -89,32 +89,32 @@ class Project
         $this->updatedAt = new \DateTimeImmutable();
     }
 
-    public function calculateStatus(array $taskStatuses): StatusEnum
+    public function calculateStatus(array $taskStatuses): Status
     {
         if (empty($taskStatuses)) {
-            return StatusEnum::TODO;
+            return Status::TODO;
         }
 
         $allDone = true;
         $hasInProgress = false;
 
         foreach ($taskStatuses as $status) {
-            if ($status === StatusEnum::ON_GOING) {
+            if ($status === Status::ON_GOING) {
                 $hasInProgress = true;
                 $allDone = false;
-            } elseif ($status === StatusEnum::TODO) {
+            } elseif ($status === Status::TODO) {
                 $allDone = false;
             }
         }
 
         if ($allDone) {
-            return StatusEnum::DONE;
+            return Status::DONE;
         }
 
         if ($hasInProgress) {
-            return StatusEnum::ON_GOING;
+            return Status::ON_GOING;
         }
 
-        return StatusEnum::TODO;
+        return Status::TODO;
     }
 }
