@@ -26,6 +26,11 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Modules/Project/Infrastructure/Doctrine/Entities'
                 prefix: 'App\Modules\Project\Infrastructure\Doctrine\Entities'
                 is_bundle: false
+            Employee:
+                type: attribute
+                dir: '%kernel.project_dir%/src/Modules/Employee/Infrastructure/Doctrine/Entities'
+                prefix: 'App\Modules\Employee\Infrastructure\Doctrine\Entities'
+                is_bundle: false
 when@test:
     doctrine:
         dbal:

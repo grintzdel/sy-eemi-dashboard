@@ -24,3 +24,6 @@ services:
 
     App\Modules\Project\Domain\Repositories\IProjectRepository:
         alias: App\Modules\Project\Infrastructure\Doctrine\Repositories\SqlProjectRepository
+
+    App\Modules\Employee\Domain\Repositories\IEmployeeRepository:
+        alias: App\Modules\Employee\Infrastructure\Doctrine\Repositories\SqlEmployeeRepository
