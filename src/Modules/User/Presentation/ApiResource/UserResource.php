@@ -40,7 +40,6 @@ use App\Modules\User\Presentation\State\Provider\ListUsersProvider;
             processor: UpdateUserProcessor::class
         )
     ],
-    routePrefix: '/users',
     paginationEnabled: false
 )]
 final readonly class UserResource
