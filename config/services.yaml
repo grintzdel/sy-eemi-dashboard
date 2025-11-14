@@ -18,3 +18,6 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Modules\Task\Application\Ports\Repositories\ITaskRepository:
+        alias: App\Modules\Task\Infrastructure\Doctrine\Repositories\SqlTaskRepository
