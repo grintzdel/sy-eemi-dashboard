@@ -21,3 +21,6 @@ services:
 
     App\Modules\Task\Domain\Repositories\ITaskRepository:
         alias: App\Modules\Task\Infrastructure\Doctrine\Repositories\SqlTaskRepository
+
+    App\Modules\Project\Domain\Repositories\IProjectRepository:
+        alias: App\Modules\Project\Infrastructure\Doctrine\Repositories\SqlProjectRepository
