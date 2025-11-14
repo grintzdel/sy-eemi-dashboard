@@ -50,6 +50,24 @@
 	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
 	header ?Permissions-Policy "browsing-topics=()"
 
+	# CORS headers
+	@cors_preflight {
+		method OPTIONS
+	}
+
+	handle @cors_preflight {
+		header Access-Control-Allow-Origin "*"
+		header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+		header Access-Control-Allow-Headers "Content-Type, Authorization"
+		header Access-Control-Max-Age "3600"
+		respond 204
+	}
+
+	header Access-Control-Allow-Origin "*"
+	header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+	header Access-Control-Allow-Headers "Content-Type, Authorization"
+	header Access-Control-Expose-Headers "Link"
+
 	@phpRoute {
 		not path /.well-known/mercure*
 		not file {path}
