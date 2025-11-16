@@ -60,7 +60,9 @@ final class UserFixtures extends Fixture
             password: 'temp',
             role: $role->value,
             createdAt: new DateTimeImmutable(),
-            updatedAt: new DateTimeImmutable()
+            updatedAt: new DateTimeImmutable(),
+            deletedAt: null,
+            avatar: $this->getRandomAvatar()
         );
 
         $hashedPassword = $this->passwordHasher->hashPassword($tempUser, 'password');
@@ -72,7 +74,17 @@ final class UserFixtures extends Fixture
             password: $hashedPassword,
             role: $role->value,
             createdAt: new DateTimeImmutable(),
-            updatedAt: new DateTimeImmutable()
+            updatedAt: new DateTimeImmutable(),
+            deletedAt: null,
+            avatar: $this->getRandomAvatar()
         );
+    }
+
+    private function getRandomAvatar(): string
+    {
+        $seed = rand(1, 1000);
+        $size = 200;
+
+        return "https://picsum.photos/seed/$seed/$size/$size";
     }
 }

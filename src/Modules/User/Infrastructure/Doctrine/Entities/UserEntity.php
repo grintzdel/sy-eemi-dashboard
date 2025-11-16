@@ -38,6 +38,9 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(name: 'deleted_at', type: 'datetime_immutable', nullable: true)]
     private ?DateTimeImmutable $deletedAt;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $avatar;
+
     public function __construct(
         string $id,
         string $name,
@@ -46,7 +49,8 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
         string $role,
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt,
-        ?DateTimeImmutable $deletedAt = null
+        ?DateTimeImmutable $deletedAt = null,
+        ?string $avatar = null
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -56,6 +60,7 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->deletedAt = $deletedAt;
+        $this->avatar = $avatar;
     }
 
     public function getUserIdentifier(): string
@@ -138,5 +143,15 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDeletedAt(?DateTimeImmutable $deletedAt): void
     {
         $this->deletedAt = $deletedAt;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): void
+    {
+        $this->avatar = $avatar;
     }
 }
