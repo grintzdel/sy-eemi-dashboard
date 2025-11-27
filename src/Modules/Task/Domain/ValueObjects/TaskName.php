@@ -12,8 +12,12 @@ final readonly class TaskName
 
     public function __construct(string $value)
     {
-        Assert::notEmpty($value, 'Task name cannot be empty');
-        Assert::maxLength($value, 255, 'Task name cannot exceed 255 characters');
+        Assert::notEmpty($value, "Task name cannot be empty");
+        Assert::maxLength(
+            $value,
+            255,
+            "Task name cannot exceed 255 characters",
+        );
 
         $this->value = $value;
     }

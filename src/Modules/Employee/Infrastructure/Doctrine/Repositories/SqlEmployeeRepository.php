@@ -12,14 +12,14 @@ use Doctrine\ORM\EntityManagerInterface;
 final readonly class SqlEmployeeRepository implements IEmployeeRepository
 {
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
     ) {}
 
     public function findById(string $id): ?Employee
     {
         $entity = $this->entityManager
             ->getRepository(EmployeeEntity::class)
-            ->findOneBy(['id' => $id, 'deletedAt' => null]);
+            ->findOneBy(["id" => $id, "deletedAt" => null]);
 
         return $entity ? $this->toDomain($entity) : null;
     }
@@ -28,9 +28,12 @@ final readonly class SqlEmployeeRepository implements IEmployeeRepository
     {
         $entities = $this->entityManager
             ->getRepository(EmployeeEntity::class)
-            ->findBy(['deletedAt' => null]);
+            ->findBy(["deletedAt" => null]);
 
-        return array_map(fn(EmployeeEntity $entity) => $this->toDomain($entity), $entities);
+        return array_map(
+            fn(EmployeeEntity $entity) => $this->toDomain($entity),
+            $entities,
+        );
     }
 
     public function save(Employee $employee): void
@@ -48,7 +51,7 @@ final readonly class SqlEmployeeRepository implements IEmployeeRepository
                 $employee->getPosition(),
                 $employee->getTaskIds(),
                 $employee->getCreatedAt(),
-                $employee->getUpdatedAt()
+                $employee->getUpdatedAt(),
             );
             $this->entityManager->persist($entity);
         } else {
@@ -84,15 +87,15 @@ final readonly class SqlEmployeeRepository implements IEmployeeRepository
             $entity->getEmail(),
             $entity->getPosition(),
             $entity->getTaskIds(),
-            $entity->getCreatedAt()
+            $entity->getCreatedAt(),
         );
 
         $reflection = new \ReflectionClass($employee);
 
-        $updatedAtProperty = $reflection->getProperty('updatedAt');
+        $updatedAtProperty = $reflection->getProperty("updatedAt");
         $updatedAtProperty->setValue($employee, $entity->getUpdatedAt());
 
-        $deletedAtProperty = $reflection->getProperty('deletedAt');
+        $deletedAtProperty = $reflection->getProperty("deletedAt");
         $deletedAtProperty->setValue($employee, $entity->getDeletedAt());
 
         return $employee;

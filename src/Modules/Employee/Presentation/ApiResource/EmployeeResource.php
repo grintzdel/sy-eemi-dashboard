@@ -17,30 +17,20 @@ use App\Modules\Employee\Presentation\State\Processor\UpdateEmployeeProcessor;
 use App\Modules\Employee\Presentation\State\Provider\GetEmployeeProvider;
 use App\Modules\Employee\Presentation\State\Provider\ListEmployeesProvider;
 
-#[ApiResource(
-    shortName: 'Employee',
-    operations: [
-        new GetCollection(
-            provider: ListEmployeesProvider::class
-        ),
-        new Get(
-            provider: GetEmployeeProvider::class
-        ),
-        new Post(
-            processor: CreateEmployeeProcessor::class
-        ),
-        new Put(
-            processor: UpdateEmployeeProcessor::class
-        ),
-        new Delete(
-            processor: DeleteEmployeeProcessor::class
-        )
-    ],
-    paginationEnabled: false
-)]
+#[
+    ApiResource(
+        shortName: "Employee",
+        operations: [
+            new GetCollection(provider: ListEmployeesProvider::class),
+            new Get(provider: GetEmployeeProvider::class),
+            new Post(processor: CreateEmployeeProcessor::class),
+            new Put(processor: UpdateEmployeeProcessor::class),
+            new Delete(processor: DeleteEmployeeProcessor::class),
+        ],
+        paginationEnabled: false,
+    ),
+]
 final readonly class EmployeeResource
 {
-    public function __construct(
-        public EmployeeViewModel $data
-    ) {}
+    public function __construct(public EmployeeViewModel $data) {}
 }

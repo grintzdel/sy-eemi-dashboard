@@ -12,11 +12,12 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class GetProjectsCompletedByPeriodQueryHandler
 {
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
     ) {}
 
-    public function __invoke(GetProjectsCompletedByPeriodQuery $query): ProjectsCompletedViewModel
-    {
+    public function __invoke(
+        GetProjectsCompletedByPeriodQuery $query,
+    ): ProjectsCompletedViewModel {
         $sql = <<<SQL
             SELECT
                 COUNT(*) as total_projects,
@@ -31,18 +32,19 @@ final readonly class GetProjectsCompletedByPeriodQueryHandler
         $result = $stmt->executeQuery();
         $row = $result->fetchAssociative();
 
-        $totalProjects = (int) $row['total_projects'];
-        $completedProjects = (int) $row['completed_projects'];
-        $completionRate = $totalProjects > 0
-            ? round(($completedProjects / $totalProjects) * 100, 1)
-            : 0.0;
+        $totalProjects = (int) $row["total_projects"];
+        $completedProjects = (int) $row["completed_projects"];
+        $completionRate =
+            $totalProjects > 0
+                ? round(($completedProjects / $totalProjects) * 100, 1)
+                : 0.0;
 
         return new ProjectsCompletedViewModel(
             totalProjects: $totalProjects,
             completedProjects: $completedProjects,
             completionRate: $completionRate,
-            inProgressProjects: (int) $row['in_progress_projects'],
-            todoProjects: (int) $row['todo_projects']
+            inProgressProjects: (int) $row["in_progress_projects"],
+            todoProjects: (int) $row["todo_projects"],
         );
     }
 }

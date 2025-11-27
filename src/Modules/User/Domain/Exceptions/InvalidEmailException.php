@@ -10,6 +10,6 @@ final class InvalidEmailException extends DomainException
 {
     public static function fromInvalidFormat(string $reason): self
     {
-        return new self(sprintf('Invalid email: %s', $reason));
+        return new self(sprintf("Invalid email: %s", $reason));
     }
 }

@@ -9,25 +9,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 final readonly class UpdateEmployeeCommand
 {
     public function __construct(
-        #[Assert\NotBlank]
-        #[Assert\Uuid]
-        public string $id,
+        #[Assert\NotBlank] #[Assert\Uuid] public string $id,
 
-        #[Assert\NotBlank]
-        #[Assert\Length(max: 255)]
-        public string $firstName,
+        #[Assert\NotBlank] #[Assert\Length(max: 255)] public string $firstName,
 
-        #[Assert\NotBlank]
-        #[Assert\Length(max: 255)]
-        public string $lastName,
+        #[Assert\NotBlank] #[Assert\Length(max: 255)] public string $lastName,
 
-        #[Assert\NotBlank]
-        #[Assert\Email]
-        #[Assert\Length(max: 255)]
+        #[Assert\NotBlank] #[Assert\Email] #[
+            Assert\Length(max: 255),
+        ]
         public string $email,
 
-        #[Assert\NotBlank]
-        #[Assert\Length(max: 255)]
-        public string $position
+        #[Assert\NotBlank] #[Assert\Length(max: 255)] public string $position,
     ) {}
 }

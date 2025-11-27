@@ -20,9 +20,12 @@ final class GetEmployeeProvider implements ProviderInterface
         $this->messageBus = $messageBus;
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): EmployeeResource
-    {
-        $viewModel = $this->handle(new GetEmployeeQuery($uriVariables['id']));
+    public function provide(
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): EmployeeResource {
+        $viewModel = $this->handle(new GetEmployeeQuery($uriVariables["id"]));
 
         return new EmployeeResource($viewModel);
     }

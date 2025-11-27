@@ -20,9 +20,6 @@ final readonly class ListTasksQueryHandler
     {
         $tasks = $this->taskRepository->findAll();
 
-        return array_map(
-            fn($task) => TaskViewModel::fromEntity($task),
-            $tasks
-        );
+        return array_map(fn($task) => TaskViewModel::fromEntity($task), $tasks);
     }
 }

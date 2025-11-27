@@ -12,7 +12,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class UpdateEmployeeCommandHandler
 {
     public function __construct(
-        private IEmployeeRepository $employeeRepository
+        private IEmployeeRepository $employeeRepository,
     ) {}
 
     /**
@@ -30,7 +30,7 @@ final readonly class UpdateEmployeeCommandHandler
             $command->firstName,
             $command->lastName,
             $command->email,
-            $command->position
+            $command->position,
         );
 
         $this->employeeRepository->save($employee);

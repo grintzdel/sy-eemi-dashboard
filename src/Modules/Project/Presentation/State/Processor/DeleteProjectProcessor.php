@@ -19,9 +19,13 @@ final class DeleteProjectProcessor implements ProcessorInterface
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): void
-    {
-        $command = new DeleteProjectCommand($uriVariables['id']);
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): void {
+        $command = new DeleteProjectCommand($uriVariables["id"]);
 
         $this->handle($command);
     }

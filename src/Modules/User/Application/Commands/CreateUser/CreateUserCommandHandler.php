@@ -21,6 +21,16 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
+final class TempPasswordUser implements PasswordAuthenticatedUserInterface
+{
+    public function __construct(private readonly string $password) {}
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+}
+
 #[AsMessageHandler]
 final readonly class CreateUserCommandHandler
 {
@@ -28,7 +38,7 @@ final readonly class CreateUserCommandHandler
         private IIdProvider $idProvider,
         private IUserRepository $userRepository,
         private EmailUniquenessService $emailUniquenessService,
-        private UserPasswordHasherInterface $passwordHasher
+        private UserPasswordHasherInterface $passwordHasher,
     ) {}
 
     /**
@@ -42,12 +52,10 @@ final readonly class CreateUserCommandHandler
 
         $this->emailUniquenessService->ensureEmailIsUnique($email);
 
+        $tempUser = new TempPasswordUser($command->getPassword());
         $hashedPasswordValue = $this->passwordHasher->hashPassword(
-            new readonly class($command->getPassword()) implements PasswordAuthenticatedUserInterface {
-                public function __construct(private string $password) {}
-                public function getPassword(): ?string { return $this->password; }
-            },
-            $command->getPassword()
+            $tempUser,
+            $command->getPassword(),
         );
 
         $user = User::create(
@@ -55,7 +63,7 @@ final readonly class CreateUserCommandHandler
             name: new UserName($command->getName()),
             email: $email,
             password: new HashedPassword($hashedPasswordValue),
-            role: Roles::from($command->getRole())
+            role: Roles::from($command->getRole()),
         );
 
         $this->userRepository->save($user);

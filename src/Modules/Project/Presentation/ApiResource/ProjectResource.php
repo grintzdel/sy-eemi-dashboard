@@ -17,30 +17,20 @@ use App\Modules\Project\Presentation\State\Processor\UpdateProjectProcessor;
 use App\Modules\Project\Presentation\State\Provider\GetProjectProvider;
 use App\Modules\Project\Presentation\State\Provider\ListProjectsProvider;
 
-#[ApiResource(
-    shortName: 'Project',
-    operations: [
-        new GetCollection(
-            provider: ListProjectsProvider::class
-        ),
-        new Get(
-            provider: GetProjectProvider::class
-        ),
-        new Post(
-            processor: CreateProjectProcessor::class
-        ),
-        new Put(
-            processor: UpdateProjectProcessor::class
-        ),
-        new Delete(
-            processor: DeleteProjectProcessor::class
-        )
-    ],
-    paginationEnabled: false
-)]
+#[
+    ApiResource(
+        shortName: "Project",
+        operations: [
+            new GetCollection(provider: ListProjectsProvider::class),
+            new Get(provider: GetProjectProvider::class),
+            new Post(processor: CreateProjectProcessor::class),
+            new Put(processor: UpdateProjectProcessor::class),
+            new Delete(processor: DeleteProjectProcessor::class),
+        ],
+        paginationEnabled: false,
+    ),
+]
 final readonly class ProjectResource
 {
-    public function __construct(
-        public ProjectViewModel $data
-    ) {}
+    public function __construct(public ProjectViewModel $data) {}
 }

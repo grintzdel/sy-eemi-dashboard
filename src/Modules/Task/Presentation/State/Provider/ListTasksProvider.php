@@ -20,13 +20,16 @@ final class ListTasksProvider implements ProviderInterface
         $this->messageBus = $messageBus;
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
-    {
+    public function provide(
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): array {
         $viewModels = $this->handle(new ListTasksQuery());
 
         return array_map(
             fn($viewModel) => new TaskResource($viewModel),
-            $viewModels
+            $viewModels,
         );
     }
 }

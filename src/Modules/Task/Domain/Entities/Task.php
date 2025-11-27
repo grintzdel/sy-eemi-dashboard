@@ -19,15 +19,14 @@ class Task
      * @param array<string> $assignedTo
      */
     public function __construct(
-        private readonly string             $id,
-        private string                      $name,
-        private string                      $description,
-        private string                      $projectId,
-        private Status                      $status = Status::TODO,
-        array                               $assignedTo = [],
-        private readonly \DateTimeImmutable $createdAt = new \DateTimeImmutable()
-    )
-    {
+        private readonly string $id,
+        private string $name,
+        private string $description,
+        private string $projectId,
+        private Status $status = Status::TODO,
+        array $assignedTo = [],
+        private readonly \DateTimeImmutable $createdAt = new \DateTimeImmutable(),
+    ) {
         $this->assignedTo = $assignedTo;
         $this->updatedAt = new \DateTimeImmutable();
     }
@@ -100,7 +99,7 @@ class Task
     public function unassignFromEmployee(string $employeeId): void
     {
         $this->assignedTo = array_values(
-            array_filter($this->assignedTo, fn($id) => $id !== $employeeId)
+            array_filter($this->assignedTo, fn($id) => $id !== $employeeId),
         );
         $this->touch();
     }

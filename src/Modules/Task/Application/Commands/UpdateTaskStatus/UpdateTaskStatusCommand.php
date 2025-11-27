@@ -8,11 +8,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class UpdateTaskStatusCommand
 {
-    #[Assert\NotBlank(message: 'Task ID is required')]
+    #[Assert\NotBlank(message: "Task ID is required")]
     private string $id;
 
-    #[Assert\NotBlank(message: 'Status is required')]
-    #[Assert\Choice(choices: ['TODO', 'ON_GOING', 'DONE'], message: 'Invalid status')]
+    #[Assert\NotBlank(message: "Status is required")]
+    #[
+        Assert\Choice(
+            choices: ["TODO", "ON_GOING", "DONE"],
+            message: "Invalid status",
+        ),
+    ]
     private string $status;
 
     public function __construct(string $id, string $status)

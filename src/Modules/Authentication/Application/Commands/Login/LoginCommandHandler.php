@@ -20,7 +20,7 @@ final readonly class LoginCommandHandler
         private IUserRepository $userRepository,
         private UserPasswordHasherInterface $passwordHasher,
         private JwtTokenGenerator $tokenGenerator,
-        private int $jwtTtl = 3600
+        private int $jwtTtl = 3600,
     ) {}
 
     /**
@@ -44,10 +44,15 @@ final readonly class LoginCommandHandler
             role: $user->getRole()->value,
             createdAt: $user->getCreatedAt(),
             updatedAt: $user->getUpdatedAt(),
-            deletedAt: $user->getDeletedAt()
+            deletedAt: $user->getDeletedAt(),
         );
 
-        if (!$this->passwordHasher->isPasswordValid($userEntity, $command->getPassword())) {
+        if (
+            !$this->passwordHasher->isPasswordValid(
+                $userEntity,
+                $command->getPassword(),
+            )
+        ) {
             throw InvalidCredentialsException::withEmail($command->getEmail());
         }
 

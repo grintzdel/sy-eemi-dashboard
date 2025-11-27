@@ -16,35 +16,35 @@ use App\Modules\User\Presentation\State\Provider\GetUserByEmailProvider;
 use App\Modules\User\Presentation\State\Provider\GetUserProvider;
 use App\Modules\User\Presentation\State\Provider\ListUsersProvider;
 
-#[ApiResource(
-    shortName: 'User',
-    operations: [
-        new GetCollection(
-            security: 'is_granted("ROLE_ADMIN") or is_granted("ROLE_MODERATOR")',
-            provider: ListUsersProvider::class
-        ),
-        new Get(
-            security: 'is_granted("ROLE_USER")',
-            provider: GetUserProvider::class
-        ),
-        new Get(
-            uriTemplate: '/users/email/{email}',
-            provider: GetUserByEmailProvider::class
-        ),
-        new Post(
-            security: 'is_granted("ROLE_ADMIN")',
-            processor: CreateUserProcessor::class
-        ),
-        new Put(
-            security: 'is_granted("ROLE_ADMIN") or object.id == user.getId()',
-            processor: UpdateUserProcessor::class
-        )
-    ],
-    paginationEnabled: false
-)]
+#[
+    ApiResource(
+        shortName: "User",
+        operations: [
+            new GetCollection(
+                security: 'is_granted("ROLE_ADMIN") or is_granted("ROLE_MODERATOR")',
+                provider: ListUsersProvider::class,
+            ),
+            new Get(
+                security: 'is_granted("ROLE_USER")',
+                provider: GetUserProvider::class,
+            ),
+            new Get(
+                uriTemplate: "/users/email/{email}",
+                provider: GetUserByEmailProvider::class,
+            ),
+            new Post(
+                security: 'is_granted("ROLE_ADMIN")',
+                processor: CreateUserProcessor::class,
+            ),
+            new Put(
+                security: 'is_granted("ROLE_ADMIN") or object.id == user.getId()',
+                processor: UpdateUserProcessor::class,
+            ),
+        ],
+        paginationEnabled: false,
+    ),
+]
 final readonly class UserResource
 {
-    public function __construct(
-        public UserViewModel $data
-    ) {}
+    public function __construct(public UserViewModel $data) {}
 }

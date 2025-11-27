@@ -15,16 +15,17 @@ final class GetUserProvider implements ProviderInterface
 {
     use HandleTrait;
 
-    public function __construct(
-        MessageBusInterface $messageBus
-    )
+    public function __construct(MessageBusInterface $messageBus)
     {
         $this->messageBus = $messageBus;
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): UserResource
-    {
-        $viewModel = $this->handle(new GetUserQuery($uriVariables['id']));
+    public function provide(
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): UserResource {
+        $viewModel = $this->handle(new GetUserQuery($uriVariables["id"]));
 
         return new UserResource($viewModel);
     }

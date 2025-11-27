@@ -15,19 +15,21 @@ final class UpdateUserProcessor implements ProcessorInterface
 {
     use HandleTrait;
 
-    public function __construct(
-        MessageBusInterface $messageBus
-    )
+    public function __construct(MessageBusInterface $messageBus)
     {
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): UserResource
-    {
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): UserResource {
         $command = new UpdateUserCommand(
-            id: $uriVariables['id'],
-            name: $data['name'],
-            email: $data['email']
+            id: $uriVariables["id"],
+            name: $data["name"],
+            email: $data["email"],
         );
 
         $viewModel = $this->handle($command);

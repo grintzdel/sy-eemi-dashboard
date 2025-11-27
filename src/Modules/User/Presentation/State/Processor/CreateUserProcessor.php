@@ -16,20 +16,22 @@ final class CreateUserProcessor implements ProcessorInterface
 {
     use HandleTrait;
 
-    public function __construct(
-        MessageBusInterface $messageBus
-    )
+    public function __construct(MessageBusInterface $messageBus)
     {
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): UserResource
-    {
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): UserResource {
         $command = new CreateUserCommand(
-            name: $data['name'],
-            email: $data['email'],
-            password: $data['password'],
-            role: $data['role'] ?? Roles::ROLE_USER->value
+            name: $data["name"],
+            email: $data["email"],
+            password: $data["password"],
+            role: $data["role"] ?? Roles::ROLE_USER->value,
         );
 
         $viewModel = $this->handle($command);

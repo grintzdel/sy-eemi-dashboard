@@ -8,11 +8,9 @@ use Webmozart\Assert\Assert;
 
 final readonly class UserId
 {
-    public function __construct(
-        private string $value
-    )
+    public function __construct(private string $value)
     {
-        Assert::uuid($value, 'User ID must be a valid UUID');
+        Assert::uuid($value, "User ID must be a valid UUID");
     }
 
     public function getValue(): string

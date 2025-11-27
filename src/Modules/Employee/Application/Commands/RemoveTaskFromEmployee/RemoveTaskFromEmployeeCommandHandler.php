@@ -12,7 +12,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class RemoveTaskFromEmployeeCommandHandler
 {
     public function __construct(
-        private IEmployeeRepository $employeeRepository
+        private IEmployeeRepository $employeeRepository,
     ) {}
 
     /**

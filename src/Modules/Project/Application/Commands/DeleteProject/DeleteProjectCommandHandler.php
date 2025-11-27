@@ -12,10 +12,8 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class DeleteProjectCommandHandler
 {
     public function __construct(
-        private IProjectRepository $projectRepository
-    )
-    {
-    }
+        private IProjectRepository $projectRepository,
+    ) {}
 
     public function __invoke(DeleteProjectCommand $command): void
     {

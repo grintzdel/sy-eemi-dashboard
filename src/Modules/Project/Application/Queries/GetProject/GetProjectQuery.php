@@ -6,9 +6,5 @@ namespace App\Modules\Project\Application\Queries\GetProject;
 
 final readonly class GetProjectQuery
 {
-    public function __construct(
-        public string $id
-    )
-    {
-    }
+    public function __construct(public string $id) {}
 }

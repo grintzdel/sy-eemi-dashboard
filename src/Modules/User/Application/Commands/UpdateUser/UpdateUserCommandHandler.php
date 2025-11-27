@@ -21,7 +21,7 @@ final readonly class UpdateUserCommandHandler
 {
     public function __construct(
         private IUserRepository $userRepository,
-        private EmailUniquenessService $emailUniquenessService
+        private EmailUniquenessService $emailUniquenessService,
     ) {}
 
     /**
@@ -41,12 +41,12 @@ final readonly class UpdateUserCommandHandler
 
         $email = new UserEmail($command->getEmail());
 
-        $this->emailUniquenessService->ensureEmailIsUnique($email, $command->getId());
-
-        $user->update(
-            name: new UserName($command->getName()),
-            email: $email
+        $this->emailUniquenessService->ensureEmailIsUnique(
+            $email,
+            $command->getId(),
         );
+
+        $user->update(name: new UserName($command->getName()), email: $email);
 
         $this->userRepository->save($user);
 

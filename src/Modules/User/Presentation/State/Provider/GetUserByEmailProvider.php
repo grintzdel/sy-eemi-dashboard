@@ -15,16 +15,19 @@ final class GetUserByEmailProvider implements ProviderInterface
 {
     use HandleTrait;
 
-    public function __construct(
-        MessageBusInterface $messageBus
-    )
+    public function __construct(MessageBusInterface $messageBus)
     {
         $this->messageBus = $messageBus;
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): UserResource
-    {
-        $viewModel = $this->handle(new GetUserByEmailQuery($uriVariables['email']));
+    public function provide(
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): UserResource {
+        $viewModel = $this->handle(
+            new GetUserByEmailQuery($uriVariables["email"]),
+        );
 
         return new UserResource($viewModel);
     }

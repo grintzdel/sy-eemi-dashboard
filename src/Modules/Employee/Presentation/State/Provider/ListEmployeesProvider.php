@@ -20,13 +20,16 @@ final class ListEmployeesProvider implements ProviderInterface
         $this->messageBus = $messageBus;
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
-    {
+    public function provide(
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): array {
         $viewModels = $this->handle(new ListEmployeesQuery());
 
         return array_map(
             fn($viewModel) => new EmployeeResource($viewModel),
-            $viewModels
+            $viewModels,
         );
     }
 }

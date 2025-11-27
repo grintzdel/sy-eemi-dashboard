@@ -13,9 +13,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 final readonly class GetUserByEmailQueryHandler
 {
-    public function __construct(
-        private IUserRepository $userRepository
-    ) {}
+    public function __construct(private IUserRepository $userRepository) {}
 
     /**
      * @throws UserNotFoundException

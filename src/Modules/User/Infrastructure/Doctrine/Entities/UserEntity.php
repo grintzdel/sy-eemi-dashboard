@@ -10,35 +10,41 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'users')]
+#[ORM\Table(name: "users")]
 class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'string', length: 36)]
+    #[ORM\Column(type: "string", length: 36)]
     private string $id;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: "string", length: 50)]
     private string $name;
 
-    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[ORM\Column(type: "string", length: 255, unique: true)]
     private string $email;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: "string", length: 255)]
     private string $password;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: "string", length: 50)]
     private string $role;
 
-    #[ORM\Column(name: 'created_at', type: 'datetime_immutable')]
+    #[ORM\Column(name: "created_at", type: "datetime_immutable")]
     private DateTimeImmutable $createdAt;
 
-    #[ORM\Column(name: 'updated_at', type: 'datetime_immutable')]
+    #[ORM\Column(name: "updated_at", type: "datetime_immutable")]
     private DateTimeImmutable $updatedAt;
 
-    #[ORM\Column(name: 'deleted_at', type: 'datetime_immutable', nullable: true)]
+    #[
+        ORM\Column(
+            name: "deleted_at",
+            type: "datetime_immutable",
+            nullable: true,
+        ),
+    ]
     private ?DateTimeImmutable $deletedAt;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $avatar;
 
     public function __construct(
@@ -50,7 +56,7 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt,
         ?DateTimeImmutable $deletedAt = null,
-        ?string $avatar = null
+        ?string $avatar = null,
     ) {
         $this->id = $id;
         $this->name = $name;

@@ -21,19 +21,23 @@ final class UpdateEmployeeProcessor implements ProcessorInterface
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): EmployeeResource
-    {
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): EmployeeResource {
         $command = new UpdateEmployeeCommand(
-            $uriVariables['id'],
+            $uriVariables["id"],
             $data->data->firstName,
             $data->data->lastName,
             $data->data->email,
-            $data->data->position
+            $data->data->position,
         );
 
         $this->handle($command);
 
-        $viewModel = $this->handle(new GetEmployeeQuery($uriVariables['id']));
+        $viewModel = $this->handle(new GetEmployeeQuery($uriVariables["id"]));
 
         return new EmployeeResource($viewModel);
     }

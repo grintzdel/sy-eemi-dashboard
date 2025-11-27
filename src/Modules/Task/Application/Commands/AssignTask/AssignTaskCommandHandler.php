@@ -28,7 +28,7 @@ final readonly class AssignTaskCommandHandler
 
         $this->taskRepository->save($task);
 
-        return ['id' => $task->getId(), 'assignedTo' => $task->getAssignedTo()];
+        return ["id" => $task->getId(), "assignedTo" => $task->getAssignedTo()];
     }
 
     /**

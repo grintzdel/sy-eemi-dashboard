@@ -8,6 +8,8 @@ class EmployeeNotFoundException extends \Exception
 {
     public function __construct(string $employeeId)
     {
-        parent::__construct(sprintf('Employee with ID "%s" not found.', $employeeId));
+        parent::__construct(
+            sprintf('Employee with ID "%s" not found.', $employeeId),
+        );
     }
 }

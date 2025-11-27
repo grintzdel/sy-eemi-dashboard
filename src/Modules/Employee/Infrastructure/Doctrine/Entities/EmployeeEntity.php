@@ -7,35 +7,35 @@ namespace App\Modules\Employee\Infrastructure\Doctrine\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'employees')]
+#[ORM\Table(name: "employees")]
 class EmployeeEntity
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'string', length: 36)]
+    #[ORM\Column(type: "string", length: 36)]
     private string $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: "string", length: 255)]
     private string $firstName;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: "string", length: 255)]
     private string $lastName;
 
-    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[ORM\Column(type: "string", length: 255, unique: true)]
     private string $email;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: "string", length: 255)]
     private string $position;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: "json")]
     private array $taskIds = [];
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: "datetime_immutable")]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: "datetime_immutable")]
     private \DateTimeImmutable $updatedAt;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    #[ORM\Column(type: "datetime_immutable", nullable: true)]
     private ?\DateTimeImmutable $deletedAt = null;
 
     public function __construct(
@@ -46,7 +46,7 @@ class EmployeeEntity
         string $position,
         array $taskIds,
         \DateTimeImmutable $createdAt,
-        \DateTimeImmutable $updatedAt
+        \DateTimeImmutable $updatedAt,
     ) {
         $this->id = $id;
         $this->firstName = $firstName;

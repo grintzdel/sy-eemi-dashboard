@@ -11,6 +11,6 @@ final readonly class ProjectsCompletedViewModel
         public int $completedProjects,
         public float $completionRate,
         public int $inProgressProjects,
-        public int $todoProjects
+        public int $todoProjects,
     ) {}
 }

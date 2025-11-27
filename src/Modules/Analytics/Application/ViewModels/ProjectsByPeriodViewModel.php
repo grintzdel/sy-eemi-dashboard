@@ -11,6 +11,6 @@ final readonly class ProjectsByPeriodViewModel
         public int $periodNumber,
         public string $periodLabel,
         public int $count,
-        public int $year
+        public int $year,
     ) {}
 }

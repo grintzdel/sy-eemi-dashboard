@@ -19,9 +19,13 @@ final class DeleteEmployeeProcessor implements ProcessorInterface
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): void
-    {
-        $command = new DeleteEmployeeCommand($uriVariables['id']);
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): void {
+        $command = new DeleteEmployeeCommand($uriVariables["id"]);
 
         $this->handle($command);
     }

@@ -21,14 +21,18 @@ final class CreateEmployeeProcessor implements ProcessorInterface
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): EmployeeResource
-    {
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): EmployeeResource {
         $command = new CreateEmployeeCommand(
             $data->data->firstName,
             $data->data->lastName,
             $data->data->email,
             $data->data->position,
-            $data->data->taskIds ?? []
+            $data->data->taskIds ?? [],
         );
 
         $employeeId = $this->handle($command);

@@ -13,7 +13,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class GetEmployeeQueryHandler
 {
     public function __construct(
-        private IEmployeeRepository $employeeRepository
+        private IEmployeeRepository $employeeRepository,
     ) {}
 
     /**
@@ -35,7 +35,7 @@ final readonly class GetEmployeeQueryHandler
             $employee->getPosition(),
             $employee->getTaskIds(),
             $employee->getCreatedAt(),
-            $employee->getUpdatedAt()
+            $employee->getUpdatedAt(),
         );
     }
 }

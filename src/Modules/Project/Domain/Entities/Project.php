@@ -17,9 +17,8 @@ class Project
         private string $name,
         private string $description,
         array $taskIds = [],
-        private readonly \DateTimeImmutable $createdAt = new \DateTimeImmutable()
-    )
-    {
+        private readonly \DateTimeImmutable $createdAt = new \DateTimeImmutable(),
+    ) {
         $this->taskIds = $taskIds;
         $this->updatedAt = new \DateTimeImmutable();
     }
@@ -76,10 +75,9 @@ class Project
 
     public function removeTask(string $taskId): void
     {
-        $this->taskIds = array_values(array_filter(
-            $this->taskIds,
-            fn(string $id) => $id !== $taskId
-        ));
+        $this->taskIds = array_values(
+            array_filter($this->taskIds, fn(string $id) => $id !== $taskId),
+        );
         $this->updatedAt = new \DateTimeImmutable();
     }
 

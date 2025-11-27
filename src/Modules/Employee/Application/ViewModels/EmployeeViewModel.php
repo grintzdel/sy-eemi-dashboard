@@ -14,8 +14,6 @@ final readonly class EmployeeViewModel
         public string $position,
         public array $taskIds,
         public \DateTimeImmutable $createdAt,
-        public \DateTimeImmutable $updatedAt
-    )
-    {
-    }
+        public \DateTimeImmutable $updatedAt,
+    ) {}
 }

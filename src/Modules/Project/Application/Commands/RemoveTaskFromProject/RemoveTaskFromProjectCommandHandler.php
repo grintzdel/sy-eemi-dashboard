@@ -12,10 +12,8 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class RemoveTaskFromProjectCommandHandler
 {
     public function __construct(
-        private IProjectRepository $projectRepository
-    )
-    {
-    }
+        private IProjectRepository $projectRepository,
+    ) {}
 
     public function __invoke(RemoveTaskFromProjectCommand $command): void
     {

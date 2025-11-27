@@ -16,20 +16,22 @@ final class LoginProcessor implements ProcessorInterface
 {
     use HandleTrait;
 
-    public function __construct(
-        MessageBusInterface $messageBus
-    )
+    public function __construct(MessageBusInterface $messageBus)
     {
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): TokenViewModel
-    {
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): TokenViewModel {
         assert($data instanceof LoginDTO);
 
         $command = new LoginCommand(
             email: $data->email,
-            password: $data->password
+            password: $data->password,
         );
 
         return $this->handle($command);

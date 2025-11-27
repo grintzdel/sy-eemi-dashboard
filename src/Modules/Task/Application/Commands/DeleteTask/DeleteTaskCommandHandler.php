@@ -26,7 +26,7 @@ final readonly class DeleteTaskCommandHandler
 
         $this->taskRepository->delete($task);
 
-        return ['id' => $task->getId(), 'deleted' => true];
+        return ["id" => $task->getId(), "deleted" => true];
     }
 
     /**

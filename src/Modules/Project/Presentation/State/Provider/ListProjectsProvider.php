@@ -20,10 +20,16 @@ final class ListProjectsProvider implements ProviderInterface
         $this->messageBus = $messageBus;
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
-    {
+    public function provide(
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): array {
         $viewModels = $this->handle(new ListProjectsQuery());
 
-        return array_map(fn($viewModel) => new ProjectResource($viewModel), $viewModels);
+        return array_map(
+            fn($viewModel) => new ProjectResource($viewModel),
+            $viewModels,
+        );
     }
 }

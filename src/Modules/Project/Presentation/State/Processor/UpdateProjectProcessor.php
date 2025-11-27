@@ -21,17 +21,21 @@ final class UpdateProjectProcessor implements ProcessorInterface
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): ProjectResource
-    {
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): ProjectResource {
         $command = new UpdateProjectCommand(
-            $uriVariables['id'],
+            $uriVariables["id"],
             $data->data->name,
-            $data->data->description
+            $data->data->description,
         );
 
         $this->handle($command);
 
-        $viewModel = $this->handle(new GetProjectQuery($uriVariables['id']));
+        $viewModel = $this->handle(new GetProjectQuery($uriVariables["id"]));
 
         return new ProjectResource($viewModel);
     }

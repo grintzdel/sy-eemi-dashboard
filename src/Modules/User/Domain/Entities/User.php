@@ -14,14 +14,14 @@ use DateTimeImmutable;
 final class User
 {
     private function __construct(
-        private readonly UserId            $id,
-        private UserName                   $name,
-        private UserEmail                  $email,
-        private HashedPassword             $password,
-        private Roles                      $role,
+        private readonly UserId $id,
+        private UserName $name,
+        private UserEmail $email,
+        private HashedPassword $password,
+        private Roles $role,
         private readonly DateTimeImmutable $createdAt,
-        private DateTimeImmutable          $updatedAt,
-        private ?DateTimeImmutable         $deletedAt = null
+        private DateTimeImmutable $updatedAt,
+        private ?DateTimeImmutable $deletedAt = null,
     ) {}
 
     public static function create(
@@ -29,9 +29,8 @@ final class User
         UserName $name,
         UserEmail $email,
         HashedPassword $password,
-        Roles $role = Roles::ROLE_USER
-    ): self
-    {
+        Roles $role = Roles::ROLE_USER,
+    ): self {
         $now = new DateTimeImmutable();
 
         return new self(
@@ -41,7 +40,7 @@ final class User
             password: $password,
             role: $role,
             createdAt: $now,
-            updatedAt: $now
+            updatedAt: $now,
         );
     }
 
@@ -53,9 +52,8 @@ final class User
         Roles $role,
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt,
-        ?DateTimeImmutable $deletedAt = null
-    ): self
-    {
+        ?DateTimeImmutable $deletedAt = null,
+    ): self {
         return new self(
             id: $id,
             name: $name,
@@ -64,14 +62,11 @@ final class User
             role: $role,
             createdAt: $createdAt,
             updatedAt: $updatedAt,
-            deletedAt: $deletedAt
+            deletedAt: $deletedAt,
         );
     }
 
-    public function update(
-        UserName $name,
-        UserEmail $email
-    ): void
+    public function update(UserName $name, UserEmail $email): void
     {
         $this->name = $name;
         $this->email = $email;

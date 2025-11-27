@@ -8,11 +8,9 @@ use Webmozart\Assert\Assert;
 
 final readonly class HashedPassword
 {
-    public function __construct(
-        private string $value
-    )
+    public function __construct(private string $value)
     {
-        Assert::notEmpty($this->value, 'Hashed password cannot be empty');
+        Assert::notEmpty($this->value, "Hashed password cannot be empty");
     }
 
     public function getValue(): string

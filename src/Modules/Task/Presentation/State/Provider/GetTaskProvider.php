@@ -20,9 +20,12 @@ final class GetTaskProvider implements ProviderInterface
         $this->messageBus = $messageBus;
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): TaskResource
-    {
-        $viewModel = $this->handle(new GetTaskQuery($uriVariables['id']));
+    public function provide(
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): TaskResource {
+        $viewModel = $this->handle(new GetTaskQuery($uriVariables["id"]));
 
         return new TaskResource($viewModel);
     }

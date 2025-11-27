@@ -15,10 +15,8 @@ final readonly class GetProjectQueryHandler
 {
     public function __construct(
         private IProjectRepository $projectRepository,
-        private ITaskRepository $taskRepository
-    )
-    {
-    }
+        private ITaskRepository $taskRepository,
+    ) {}
 
     public function __invoke(GetProjectQuery $query): ProjectViewModel
     {
@@ -45,7 +43,7 @@ final readonly class GetProjectQueryHandler
             $status,
             $project->getTaskIds(),
             $project->getCreatedAt(),
-            $project->getUpdatedAt()
+            $project->getUpdatedAt(),
         );
     }
 }

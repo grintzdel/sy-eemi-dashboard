@@ -10,7 +10,8 @@ use App\Modules\Project\Infrastructure\Doctrine\Entities\ProjectEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-class SqlProjectRepository extends ServiceEntityRepository implements IProjectRepository
+class SqlProjectRepository extends ServiceEntityRepository implements
+    IProjectRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -28,9 +29,12 @@ class SqlProjectRepository extends ServiceEntityRepository implements IProjectRe
     public function findAll(): array
     {
         /** @var array<ProjectEntity> $projectEntities */
-        $projectEntities = $this->findBy(['deletedAt' => null]);
+        $projectEntities = $this->findBy(["deletedAt" => null]);
 
-        return array_map(fn(ProjectEntity $entity) => $this->toDomain($entity), $projectEntities);
+        return array_map(
+            fn(ProjectEntity $entity) => $this->toDomain($entity),
+            $projectEntities,
+        );
     }
 
     public function save(Project $project): void
@@ -48,7 +52,7 @@ class SqlProjectRepository extends ServiceEntityRepository implements IProjectRe
                 $project->getTaskIds(),
                 $project->getCreatedAt(),
                 $project->getUpdatedAt(),
-                $project->getDeletedAt()
+                $project->getDeletedAt(),
             );
             $em->persist($projectEntity);
         } else {
@@ -75,15 +79,15 @@ class SqlProjectRepository extends ServiceEntityRepository implements IProjectRe
             $entity->getName(),
             $entity->getDescription(),
             $entity->getTaskIds(),
-            $entity->getCreatedAt()
+            $entity->getCreatedAt(),
         );
 
         $reflection = new \ReflectionClass($project);
 
-        $updatedAtProperty = $reflection->getProperty('updatedAt');
+        $updatedAtProperty = $reflection->getProperty("updatedAt");
         $updatedAtProperty->setValue($project, $entity->getUpdatedAt());
 
-        $deletedAtProperty = $reflection->getProperty('deletedAt');
+        $deletedAtProperty = $reflection->getProperty("deletedAt");
         $deletedAtProperty->setValue($project, $entity->getDeletedAt());
 
         return $project;

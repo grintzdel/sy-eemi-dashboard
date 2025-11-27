@@ -12,25 +12,29 @@ use Doctrine\ORM\EntityManagerInterface;
 final readonly class EmailUniquenessService
 {
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
     ) {}
 
     /**
      * @throws EmailAlreadyExistsException
      */
-    public function ensureEmailIsUnique(UserEmail $email, ?string $excludeUserId = null): void
-    {
+    public function ensureEmailIsUnique(
+        UserEmail $email,
+        ?string $excludeUserId = null,
+    ): void {
         $qb = $this->entityManager
             ->getRepository(UserEntity::class)
-            ->createQueryBuilder('u')
-            ->select('COUNT(u.id)')
-            ->where('u.email = :email')
-            ->andWhere('u.deletedAt IS NULL')
-            ->setParameter('email', $email->getValue());
+            ->createQueryBuilder("u")
+            ->select("COUNT(u.id)")
+            ->where("u.email = :email")
+            ->andWhere("u.deletedAt IS NULL")
+            ->setParameter("email", $email->getValue());
 
         if ($excludeUserId !== null) {
-            $qb->andWhere('u.id != :userId')
-                ->setParameter('userId', $excludeUserId);
+            $qb->andWhere("u.id != :userId")->setParameter(
+                "userId",
+                $excludeUserId,
+            );
         }
 
         $count = (int) $qb->getQuery()->getSingleScalarResult();

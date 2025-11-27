@@ -10,6 +10,6 @@ final readonly class GetProjectsCompletedByPeriodQuery
 {
     public function __construct(
         public PeriodType $period = PeriodType::MONTH,
-        public ?int $year = null
+        public ?int $year = null,
     ) {}
 }

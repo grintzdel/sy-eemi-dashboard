@@ -17,30 +17,20 @@ use App\Modules\Task\Presentation\State\Processor\UpdateTaskProcessor;
 use App\Modules\Task\Presentation\State\Provider\GetTaskProvider;
 use App\Modules\Task\Presentation\State\Provider\ListTasksProvider;
 
-#[ApiResource(
-    shortName: 'Task',
-    operations: [
-        new GetCollection(
-            provider: ListTasksProvider::class
-        ),
-        new Get(
-            provider: GetTaskProvider::class
-        ),
-        new Post(
-            processor: CreateTaskProcessor::class
-        ),
-        new Put(
-            processor: UpdateTaskProcessor::class
-        ),
-        new Delete(
-            processor: DeleteTaskProcessor::class
-        )
-    ],
-    paginationEnabled: false
-)]
+#[
+    ApiResource(
+        shortName: "Task",
+        operations: [
+            new GetCollection(provider: ListTasksProvider::class),
+            new Get(provider: GetTaskProvider::class),
+            new Post(processor: CreateTaskProcessor::class),
+            new Put(processor: UpdateTaskProcessor::class),
+            new Delete(processor: DeleteTaskProcessor::class),
+        ],
+        paginationEnabled: false,
+    ),
+]
 final readonly class TaskResource
 {
-    public function __construct(
-        public TaskViewModel $data
-    ) {}
+    public function __construct(public TaskViewModel $data) {}
 }

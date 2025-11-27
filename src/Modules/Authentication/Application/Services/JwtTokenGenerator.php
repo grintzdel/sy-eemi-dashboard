@@ -10,9 +10,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 final readonly class JwtTokenGenerator
 {
-    public function __construct(
-        private JWTTokenManagerInterface $jwtManager
-    ) {}
+    public function __construct(private JWTTokenManagerInterface $jwtManager) {}
 
     public function generateToken(User $user): string
     {
@@ -24,7 +22,7 @@ final readonly class JwtTokenGenerator
             role: $user->getRole()->value,
             createdAt: $user->getCreatedAt(),
             updatedAt: $user->getUpdatedAt(),
-            deletedAt: $user->getDeletedAt()
+            deletedAt: $user->getDeletedAt(),
         );
 
         return $this->jwtManager->create($userEntity);

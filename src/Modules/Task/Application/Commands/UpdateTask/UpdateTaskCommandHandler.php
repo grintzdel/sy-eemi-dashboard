@@ -29,7 +29,7 @@ final readonly class UpdateTaskCommandHandler
 
         $this->taskRepository->save($task);
 
-        return ['id' => $task->getId()];
+        return ["id" => $task->getId()];
     }
 
     /**

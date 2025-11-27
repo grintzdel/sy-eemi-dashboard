@@ -21,19 +21,23 @@ final class CreateTaskProcessor implements ProcessorInterface
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): TaskResource
-    {
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): TaskResource {
         $command = new CreateTaskCommand(
-            name: $data['name'],
-            description: $data['description'],
-            projectId: $data['projectId'],
-            status: $data['status'] ?? null,
-            assignedTo: $data['assignedTo'] ?? null
+            name: $data["name"],
+            description: $data["description"],
+            projectId: $data["projectId"],
+            status: $data["status"] ?? null,
+            assignedTo: $data["assignedTo"] ?? null,
         );
 
         $result = $this->handle($command);
 
-        $viewModel = $this->handle(new GetTaskQuery($result['id']));
+        $viewModel = $this->handle(new GetTaskQuery($result["id"]));
 
         return new TaskResource($viewModel);
     }

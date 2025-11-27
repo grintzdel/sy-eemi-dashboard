@@ -16,7 +16,7 @@ final class Employee
         private string $email,
         private string $position,
         private array $taskIds = [],
-        private readonly \DateTimeImmutable $createdAt = new \DateTimeImmutable()
+        private readonly \DateTimeImmutable $createdAt = new \DateTimeImmutable(),
     ) {
         $this->updatedAt = new \DateTimeImmutable();
     }
@@ -66,8 +66,12 @@ final class Employee
         return $this->deletedAt;
     }
 
-    public function update(string $firstName, string $lastName, string $email, string $position): void
-    {
+    public function update(
+        string $firstName,
+        string $lastName,
+        string $email,
+        string $position,
+    ): void {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;

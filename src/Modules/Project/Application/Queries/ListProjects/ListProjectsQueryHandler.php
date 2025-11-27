@@ -14,10 +14,8 @@ final readonly class ListProjectsQueryHandler
 {
     public function __construct(
         private IProjectRepository $projectRepository,
-        private ITaskRepository $taskRepository
-    )
-    {
-    }
+        private ITaskRepository $taskRepository,
+    ) {}
 
     public function __invoke(ListProjectsQuery $query): array
     {
@@ -41,7 +39,7 @@ final readonly class ListProjectsQueryHandler
                 $status,
                 $project->getTaskIds(),
                 $project->getCreatedAt(),
-                $project->getUpdatedAt()
+                $project->getUpdatedAt(),
             );
         }, $projects);
     }

@@ -13,7 +13,7 @@ use Symfony\Component\Uid\Uuid;
 final readonly class CreateEmployeeCommandHandler
 {
     public function __construct(
-        private IEmployeeRepository $employeeRepository
+        private IEmployeeRepository $employeeRepository,
     ) {}
 
     public function __invoke(CreateEmployeeCommand $command): string
@@ -24,7 +24,7 @@ final readonly class CreateEmployeeCommandHandler
             $command->lastName,
             $command->email,
             $command->position,
-            $command->taskIds
+            $command->taskIds,
         );
 
         $this->employeeRepository->save($employee);

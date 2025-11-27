@@ -10,6 +10,6 @@ final class InvalidCredentialsException extends DomainException
 {
     public static function withEmail(string $email): self
     {
-        return new self(sprintf('Invalid credentials for email: %s', $email));
+        return new self(sprintf("Invalid credentials for email: %s", $email));
     }
 }

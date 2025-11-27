@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Modules\Shared\Presentation\Controllers;
 
@@ -14,7 +14,7 @@ abstract class AppController extends AbstractController
 {
     public function __construct(
         private readonly MessageBusInterface $commandBus,
-        private readonly MessageBusInterface $queryBus
+        private readonly MessageBusInterface $queryBus,
     ) {}
 
     /**

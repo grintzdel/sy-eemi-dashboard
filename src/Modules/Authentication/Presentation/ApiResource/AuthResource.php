@@ -12,27 +12,27 @@ use App\Modules\Authentication\Application\ViewModels\TokenViewModel;
 use App\Modules\Authentication\Presentation\State\Processor\LoginProcessor;
 use App\Modules\Authentication\Presentation\State\Processor\RegisterProcessor;
 
-#[ApiResource(
-    shortName: 'Auth',
-    operations: [
-        new Post(
-            uriTemplate: '/auth/register',
-            security: 'true',
-            input: RegisterDTO::class,
-            output: TokenViewModel::class,
-            processor: RegisterProcessor::class
-        ),
-        new Post(
-            uriTemplate: '/auth/login',
-            security: 'true',
-            input: LoginDTO::class,
-            output: TokenViewModel::class,
-            processor: LoginProcessor::class
-        )
-    ],
-    routePrefix: '',
-    paginationEnabled: false
-)]
-final readonly class AuthResource
-{
-}
+#[
+    ApiResource(
+        shortName: "Auth",
+        operations: [
+            new Post(
+                uriTemplate: "/auth/register",
+                security: "true",
+                input: RegisterDTO::class,
+                output: TokenViewModel::class,
+                processor: RegisterProcessor::class,
+            ),
+            new Post(
+                uriTemplate: "/auth/login",
+                security: "true",
+                input: LoginDTO::class,
+                output: TokenViewModel::class,
+                processor: LoginProcessor::class,
+            ),
+        ],
+        routePrefix: "",
+        paginationEnabled: false,
+    ),
+]
+final readonly class AuthResource {}

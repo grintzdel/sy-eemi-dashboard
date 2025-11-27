@@ -19,9 +19,13 @@ final class DeleteTaskProcessor implements ProcessorInterface
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): void
-    {
-        $command = new DeleteTaskCommand($uriVariables['id']);
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): void {
+        $command = new DeleteTaskCommand($uriVariables["id"]);
 
         $this->handle($command);
     }

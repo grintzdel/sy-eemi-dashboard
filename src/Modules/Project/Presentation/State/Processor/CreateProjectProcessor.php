@@ -21,12 +21,16 @@ final class CreateProjectProcessor implements ProcessorInterface
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): ProjectResource
-    {
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): ProjectResource {
         $command = new CreateProjectCommand(
             $data->data->name,
             $data->data->description,
-            $data->data->taskIds ?? []
+            $data->data->taskIds ?? [],
         );
 
         $projectId = $this->handle($command);

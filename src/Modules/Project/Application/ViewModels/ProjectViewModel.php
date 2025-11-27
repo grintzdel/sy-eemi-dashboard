@@ -15,8 +15,6 @@ final readonly class ProjectViewModel
         public Status $status,
         public array $taskIds,
         public \DateTimeImmutable $createdAt,
-        public \DateTimeImmutable $updatedAt
-    )
-    {
-    }
+        public \DateTimeImmutable $updatedAt,
+    ) {}
 }

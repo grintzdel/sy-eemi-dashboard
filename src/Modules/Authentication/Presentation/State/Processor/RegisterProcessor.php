@@ -17,22 +17,24 @@ final class RegisterProcessor implements ProcessorInterface
 {
     use HandleTrait;
 
-    public function __construct(
-        MessageBusInterface $messageBus
-    )
+    public function __construct(MessageBusInterface $messageBus)
     {
         $this->messageBus = $messageBus;
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): TokenViewModel
-    {
+    public function process(
+        mixed $data,
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): TokenViewModel {
         assert($data instanceof RegisterDTO);
 
         $command = new RegisterCommand(
             name: $data->name,
             email: $data->email,
             password: $data->password,
-            role: $data->role ?? Roles::ROLE_USER->value
+            role: $data->role ?? Roles::ROLE_USER->value,
         );
 
         return $this->handle($command);

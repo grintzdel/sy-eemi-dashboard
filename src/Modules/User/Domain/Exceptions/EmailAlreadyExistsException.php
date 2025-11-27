@@ -10,6 +10,8 @@ final class EmailAlreadyExistsException extends DomainException
 {
     public static function withEmail(string $email): self
     {
-        return new self(sprintf('A user with email "%s" already exists', $email));
+        return new self(
+            sprintf('A user with email "%s" already exists', $email),
+        );
     }
 }

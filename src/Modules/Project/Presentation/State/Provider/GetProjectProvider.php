@@ -20,9 +20,12 @@ final class GetProjectProvider implements ProviderInterface
         $this->messageBus = $messageBus;
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): ?ProjectResource
-    {
-        $viewModel = $this->handle(new GetProjectQuery($uriVariables['id']));
+    public function provide(
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): ?ProjectResource {
+        $viewModel = $this->handle(new GetProjectQuery($uriVariables["id"]));
 
         return new ProjectResource($viewModel);
     }

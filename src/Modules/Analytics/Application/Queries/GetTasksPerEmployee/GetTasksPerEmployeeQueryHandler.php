@@ -12,7 +12,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class GetTasksPerEmployeeQueryHandler
 {
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
     ) {}
 
     public function __invoke(GetTasksPerEmployeeQuery $query): array
@@ -38,27 +38,25 @@ final readonly class GetTasksPerEmployeeQueryHandler
         $stmt = $this->entityManager->getConnection()->prepare($sql);
         $result = $stmt->executeQuery();
 
-        return array_map(
-            function (array $row): TasksPerEmployeeViewModel {
-                $totalTasks = (int) $row['total_tasks'];
-                $completedTasks = (int) $row['completed_tasks'];
-                $completionRate = $totalTasks > 0
+        return array_map(function (array $row): TasksPerEmployeeViewModel {
+            $totalTasks = (int) $row["total_tasks"];
+            $completedTasks = (int) $row["completed_tasks"];
+            $completionRate =
+                $totalTasks > 0
                     ? round(($completedTasks / $totalTasks) * 100, 1)
                     : 0.0;
 
-                return new TasksPerEmployeeViewModel(
-                    employeeId: $row['employee_id'],
-                    firstName: $row['first_name'],
-                    lastName: $row['last_name'],
-                    email: $row['email'],
-                    totalTasks: $totalTasks,
-                    completedTasks: $completedTasks,
-                    inProgressTasks: (int) $row['in_progress_tasks'],
-                    todoTasks: (int) $row['todo_tasks'],
-                    completionRate: $completionRate
-                );
-            },
-            $result->fetchAllAssociative()
-        );
+            return new TasksPerEmployeeViewModel(
+                employeeId: $row["employee_id"],
+                firstName: $row["first_name"],
+                lastName: $row["last_name"],
+                email: $row["email"],
+                totalTasks: $totalTasks,
+                completedTasks: $completedTasks,
+                inProgressTasks: (int) $row["in_progress_tasks"],
+                todoTasks: (int) $row["todo_tasks"],
+                completionRate: $completionRate,
+            );
+        }, $result->fetchAllAssociative());
     }
 }

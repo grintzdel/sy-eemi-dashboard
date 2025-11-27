@@ -13,10 +13,8 @@ use Symfony\Component\Uid\Uuid;
 final readonly class CreateProjectCommandHandler
 {
     public function __construct(
-        private IProjectRepository $projectRepository
-    )
-    {
-    }
+        private IProjectRepository $projectRepository,
+    ) {}
 
     public function __invoke(CreateProjectCommand $command): string
     {
@@ -24,7 +22,7 @@ final readonly class CreateProjectCommandHandler
             Uuid::v4()->toRfc4122(),
             $command->name,
             $command->description,
-            $command->taskIds ?? []
+            $command->taskIds ?? [],
         );
 
         $this->projectRepository->save($project);

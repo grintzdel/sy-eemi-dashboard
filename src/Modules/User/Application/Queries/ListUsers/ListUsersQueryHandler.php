@@ -11,17 +11,12 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 final readonly class ListUsersQueryHandler
 {
-    public function __construct(
-        private IUserRepository $userRepository
-    ) {}
+    public function __construct(private IUserRepository $userRepository) {}
 
     public function __invoke(ListUsersQuery $query): array
     {
         $users = $this->userRepository->findAll();
 
-        return array_map(
-            fn($user) => UserViewModel::fromEntity($user),
-            $users
-        );
+        return array_map(fn($user) => UserViewModel::fromEntity($user), $users);
     }
 }

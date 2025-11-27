@@ -15,20 +15,21 @@ final class ListUsersProvider implements ProviderInterface
 {
     use HandleTrait;
 
-    public function __construct(
-        MessageBusInterface $messageBus
-    )
+    public function __construct(MessageBusInterface $messageBus)
     {
         $this->messageBus = $messageBus;
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
-    {
+    public function provide(
+        Operation $operation,
+        array $uriVariables = [],
+        array $context = [],
+    ): array {
         $viewModels = $this->handle(new ListUsersQuery());
 
         return array_map(
             fn($viewModel) => new UserResource($viewModel),
-            $viewModels
+            $viewModels,
         );
     }
 }

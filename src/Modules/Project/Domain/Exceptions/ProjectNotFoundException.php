@@ -8,6 +8,8 @@ class ProjectNotFoundException extends \Exception
 {
     public function __construct(string $projectId)
     {
-        parent::__construct(sprintf('Project with ID "%s" not found.', $projectId));
+        parent::__construct(
+            sprintf('Project with ID "%s" not found.', $projectId),
+        );
     }
 }
