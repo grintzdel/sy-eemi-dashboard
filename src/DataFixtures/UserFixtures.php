@@ -66,8 +66,8 @@ final class UserFixtures extends Fixture
             email: $email,
             password: 'temp',
             role: $role->value,
-            createdAt: new DateTimeImmutable(),
-            updatedAt: new DateTimeImmutable(),
+            createdAt: new \DateTimeImmutable(),
+            updatedAt: new \DateTimeImmutable(),
             deletedAt: null,
             avatar: $this->getRandomAvatar(),
         );
@@ -83,8 +83,8 @@ final class UserFixtures extends Fixture
             email: $email,
             password: $hashedPassword,
             role: $role->value,
-            createdAt: new DateTimeImmutable(),
-            updatedAt: new DateTimeImmutable(),
+            createdAt: new \DateTimeImmutable(),
+            updatedAt: new \DateTimeImmutable(),
             deletedAt: null,
             avatar: $this->getRandomAvatar(),
         );
