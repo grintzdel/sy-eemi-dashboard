@@ -6,5 +6,7 @@ namespace App\Modules\Task\Application\Queries\ListTasks;
 
 final readonly class ListTasksQuery
 {
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 }

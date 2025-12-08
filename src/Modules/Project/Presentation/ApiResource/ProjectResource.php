@@ -19,7 +19,7 @@ use App\Modules\Project\Presentation\State\Provider\ListProjectsProvider;
 
 #[
     ApiResource(
-        shortName: "Project",
+        shortName: 'Project',
         operations: [
             new GetCollection(provider: ListProjectsProvider::class),
             new Get(provider: GetProjectProvider::class),
@@ -32,5 +32,7 @@ use App\Modules\Project\Presentation\State\Provider\ListProjectsProvider;
 ]
 final readonly class ProjectResource
 {
-    public function __construct(public ProjectViewModel $data) {}
+    public function __construct(public ProjectViewModel $data)
+    {
+    }
 }

@@ -15,7 +15,8 @@ abstract class AppController extends AbstractController
     public function __construct(
         private readonly MessageBusInterface $commandBus,
         private readonly MessageBusInterface $queryBus,
-    ) {}
+    ) {
+    }
 
     /**
      * @throws ExceptionInterface

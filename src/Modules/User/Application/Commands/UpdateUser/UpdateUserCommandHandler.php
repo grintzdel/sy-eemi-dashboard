@@ -22,7 +22,8 @@ final readonly class UpdateUserCommandHandler
     public function __construct(
         private IUserRepository $userRepository,
         private EmailUniquenessService $emailUniquenessService,
-    ) {}
+    ) {
+    }
 
     /**
      * @throws InvalidUserNameException
@@ -35,7 +36,7 @@ final readonly class UpdateUserCommandHandler
         $userId = new UserId($command->getId());
         $user = $this->userRepository->findById($userId);
 
-        if ($user === null) {
+        if (null === $user) {
             throw UserNotFoundException::withId($command->getId());
         }
 

@@ -16,20 +16,21 @@ final readonly class GetProjectQueryHandler
     public function __construct(
         private IProjectRepository $projectRepository,
         private ITaskRepository $taskRepository,
-    ) {}
+    ) {
+    }
 
     public function __invoke(GetProjectQuery $query): ProjectViewModel
     {
         $project = $this->projectRepository->findById($query->id);
 
-        if ($project === null) {
+        if (null === $project) {
             throw new ProjectNotFoundException($query->id);
         }
 
         $taskStatuses = [];
         foreach ($project->getTaskIds() as $taskId) {
             $task = $this->taskRepository->findById($taskId);
-            if ($task !== null) {
+            if (null !== $task) {
                 $taskStatuses[] = $task->getStatus();
             }
         }

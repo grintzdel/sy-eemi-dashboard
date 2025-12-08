@@ -13,13 +13,14 @@ final readonly class UpdateProjectCommandHandler
 {
     public function __construct(
         private IProjectRepository $projectRepository,
-    ) {}
+    ) {
+    }
 
     public function __invoke(UpdateProjectCommand $command): void
     {
         $project = $this->projectRepository->findById($command->id);
 
-        if ($project === null) {
+        if (null === $project) {
             throw new ProjectNotFoundException($command->id);
         }
 

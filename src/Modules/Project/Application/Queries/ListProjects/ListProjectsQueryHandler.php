@@ -15,7 +15,8 @@ final readonly class ListProjectsQueryHandler
     public function __construct(
         private IProjectRepository $projectRepository,
         private ITaskRepository $taskRepository,
-    ) {}
+    ) {
+    }
 
     public function __invoke(ListProjectsQuery $query): array
     {
@@ -25,7 +26,7 @@ final readonly class ListProjectsQueryHandler
             $taskStatuses = [];
             foreach ($project->getTaskIds() as $taskId) {
                 $task = $this->taskRepository->findById($taskId);
-                if ($task !== null) {
+                if (null !== $task) {
                     $taskStatuses[] = $task->getStatus();
                 }
             }

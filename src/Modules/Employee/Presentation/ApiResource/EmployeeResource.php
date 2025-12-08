@@ -19,7 +19,7 @@ use App\Modules\Employee\Presentation\State\Provider\ListEmployeesProvider;
 
 #[
     ApiResource(
-        shortName: "Employee",
+        shortName: 'Employee',
         operations: [
             new GetCollection(provider: ListEmployeesProvider::class),
             new Get(provider: GetEmployeeProvider::class),
@@ -32,5 +32,7 @@ use App\Modules\Employee\Presentation\State\Provider\ListEmployeesProvider;
 ]
 final readonly class EmployeeResource
 {
-    public function __construct(public EmployeeViewModel $data) {}
+    public function __construct(public EmployeeViewModel $data)
+    {
+    }
 }

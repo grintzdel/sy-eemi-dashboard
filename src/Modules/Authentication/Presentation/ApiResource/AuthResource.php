@@ -14,25 +14,27 @@ use App\Modules\Authentication\Presentation\State\Processor\RegisterProcessor;
 
 #[
     ApiResource(
-        shortName: "Auth",
+        shortName: 'Auth',
         operations: [
             new Post(
-                uriTemplate: "/auth/register",
-                security: "true",
+                uriTemplate: '/auth/register',
+                security: 'true',
                 input: RegisterDTO::class,
                 output: TokenViewModel::class,
                 processor: RegisterProcessor::class,
             ),
             new Post(
-                uriTemplate: "/auth/login",
-                security: "true",
+                uriTemplate: '/auth/login',
+                security: 'true',
                 input: LoginDTO::class,
                 output: TokenViewModel::class,
                 processor: LoginProcessor::class,
             ),
         ],
-        routePrefix: "",
+        routePrefix: '',
         paginationEnabled: false,
     ),
 ]
-final readonly class AuthResource {}
+final readonly class AuthResource
+{
+}

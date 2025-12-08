@@ -12,7 +12,9 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 final readonly class UpdateTaskStatusCommandHandler
 {
-    public function __construct(private ITaskRepository $taskRepository) {}
+    public function __construct(private ITaskRepository $taskRepository)
+    {
+    }
 
     /**
      * @throws TaskNotFoundException
@@ -21,7 +23,7 @@ final readonly class UpdateTaskStatusCommandHandler
     {
         $task = $this->taskRepository->findById($command->getId());
 
-        if ($task === null) {
+        if (null === $task) {
             throw TaskNotFoundException::withId($command->getId());
         }
 
@@ -29,7 +31,7 @@ final readonly class UpdateTaskStatusCommandHandler
 
         $this->taskRepository->save($task);
 
-        return ["id" => $task->getId(), "status" => $task->getStatus()->value];
+        return ['id' => $task->getId(), 'status' => $task->getStatus()->value];
     }
 
     /**

@@ -25,7 +25,7 @@ final class DeleteTaskProcessor implements ProcessorInterface
         array $uriVariables = [],
         array $context = [],
     ): void {
-        $command = new DeleteTaskCommand($uriVariables["id"]);
+        $command = new DeleteTaskCommand($uriVariables['id']);
 
         $this->handle($command);
     }

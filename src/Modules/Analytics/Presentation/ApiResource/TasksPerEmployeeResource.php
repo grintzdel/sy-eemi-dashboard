@@ -10,10 +10,10 @@ use App\Modules\Analytics\Presentation\State\Provider\GetTasksPerEmployeeProvide
 
 #[
     ApiResource(
-        shortName: "Analytics",
+        shortName: 'Analytics',
         operations: [
             new Get(
-                uriTemplate: "/analytics/tasks-per-employee",
+                uriTemplate: '/analytics/tasks-per-employee',
                 provider: GetTasksPerEmployeeProvider::class,
             ),
         ],
@@ -22,5 +22,7 @@ use App\Modules\Analytics\Presentation\State\Provider\GetTasksPerEmployeeProvide
 ]
 final readonly class TasksPerEmployeeResource
 {
-    public function __construct(public array $data) {}
+    public function __construct(public array $data)
+    {
+    }
 }

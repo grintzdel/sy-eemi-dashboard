@@ -21,7 +21,8 @@ final readonly class LoginCommandHandler
         private UserPasswordHasherInterface $passwordHasher,
         private JwtTokenGenerator $tokenGenerator,
         private int $jwtTtl = 3600,
-    ) {}
+    ) {
+    }
 
     /**
      * @throws InvalidCredentialsException
@@ -31,7 +32,7 @@ final readonly class LoginCommandHandler
         $email = new UserEmail($command->getEmail());
         $user = $this->userRepository->findByEmail($email);
 
-        if ($user === null || $user->isDeleted()) {
+        if (null === $user || $user->isDeleted()) {
             throw InvalidCredentialsException::withEmail($command->getEmail());
         }
 

@@ -25,7 +25,7 @@ final class DeleteProjectProcessor implements ProcessorInterface
         array $uriVariables = [],
         array $context = [],
     ): void {
-        $command = new DeleteProjectCommand($uriVariables["id"]);
+        $command = new DeleteProjectCommand($uriVariables['id']);
 
         $this->handle($command);
     }

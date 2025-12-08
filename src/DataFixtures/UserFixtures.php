@@ -23,31 +23,31 @@ final class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $admin = $this->createUser(
-            "Admin User",
-            "admin@example.com",
+            'Admin User',
+            'admin@example.com',
             Roles::ROLE_ADMIN,
         );
         $manager->persist($admin);
-        $this->addReference("user_admin", $admin);
+        $this->addReference('user_admin', $admin);
 
-        for ($i = 1; $i <= 2; $i++) {
+        for ($i = 1; $i <= 2; ++$i) {
             $moderator = $this->createUser(
                 $this->faker->name(),
                 "moderator$i@example.com",
                 Roles::ROLE_MODERATOR,
             );
             $manager->persist($moderator);
-            $this->addReference("user_moderator_" . $i, $moderator);
+            $this->addReference('user_moderator_'.$i, $moderator);
         }
 
-        for ($i = 1; $i <= 17; $i++) {
+        for ($i = 1; $i <= 17; ++$i) {
             $user = $this->createUser(
                 $this->faker->name(),
                 $this->faker->unique()->safeEmail(),
                 Roles::ROLE_USER,
             );
             $manager->persist($user);
-            $this->addReference("user_regular_" . $i, $user);
+            $this->addReference('user_regular_'.$i, $user);
         }
 
         $manager->flush();
@@ -62,7 +62,7 @@ final class UserFixtures extends Fixture
             id: $this->faker->uuid(),
             name: $name,
             email: $email,
-            password: "temp",
+            password: 'temp',
             role: $role->value,
             createdAt: new DateTimeImmutable(),
             updatedAt: new DateTimeImmutable(),
@@ -72,7 +72,7 @@ final class UserFixtures extends Fixture
 
         $hashedPassword = $this->passwordHasher->hashPassword(
             $tempUser,
-            "password",
+            'password',
         );
 
         return new UserEntity(

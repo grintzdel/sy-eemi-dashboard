@@ -18,8 +18,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<UserEntity>
  */
-class SqlUserRepository extends ServiceEntityRepository implements
-    IUserRepository
+class SqlUserRepository extends ServiceEntityRepository implements IUserRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -29,8 +28,8 @@ class SqlUserRepository extends ServiceEntityRepository implements
     public function findById(UserId $id): ?User
     {
         $entity = $this->findOneBy([
-            "id" => $id->getValue(),
-            "deletedAt" => null,
+            'id' => $id->getValue(),
+            'deletedAt' => null,
         ]);
 
         return $entity ? $this->toDomain($entity) : null;
@@ -39,8 +38,8 @@ class SqlUserRepository extends ServiceEntityRepository implements
     public function findByEmail(UserEmail $email): ?User
     {
         $entity = $this->findOneBy([
-            "email" => $email->getValue(),
-            "deletedAt" => null,
+            'email' => $email->getValue(),
+            'deletedAt' => null,
         ]);
 
         return $entity ? $this->toDomain($entity) : null;
@@ -48,14 +47,14 @@ class SqlUserRepository extends ServiceEntityRepository implements
 
     public function findAll(): array
     {
-        $entities = $this->createQueryBuilder("u")
-            ->where("u.deletedAt IS NULL")
-            ->orderBy("u.createdAt", "DESC")
+        $entities = $this->createQueryBuilder('u')
+            ->where('u.deletedAt IS NULL')
+            ->orderBy('u.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
 
         return array_map(
-            fn(UserEntity $entity) => $this->toDomain($entity),
+            fn (UserEntity $entity) => $this->toDomain($entity),
             $entities,
         );
     }
@@ -64,7 +63,7 @@ class SqlUserRepository extends ServiceEntityRepository implements
     {
         $entity = $this->find($user->getId()->getValue());
 
-        if ($entity === null) {
+        if (null === $entity) {
             $entity = $this->toInfrastructure($user);
             $this->getEntityManager()->persist($entity);
         } else {
@@ -78,7 +77,7 @@ class SqlUserRepository extends ServiceEntityRepository implements
     {
         $entity = $this->find($id->getValue());
 
-        if ($entity !== null) {
+        if (null !== $entity) {
             $this->getEntityManager()->remove($entity);
             $this->getEntityManager()->flush();
         }

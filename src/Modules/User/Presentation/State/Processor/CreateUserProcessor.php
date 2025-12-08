@@ -28,10 +28,10 @@ final class CreateUserProcessor implements ProcessorInterface
         array $context = [],
     ): UserResource {
         $command = new CreateUserCommand(
-            name: $data["name"],
-            email: $data["email"],
-            password: $data["password"],
-            role: $data["role"] ?? Roles::ROLE_USER->value,
+            name: $data['name'],
+            email: $data['email'],
+            password: $data['password'],
+            role: $data['role'] ?? Roles::ROLE_USER->value,
         );
 
         $viewModel = $this->handle($command);

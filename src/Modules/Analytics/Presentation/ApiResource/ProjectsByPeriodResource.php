@@ -10,10 +10,10 @@ use App\Modules\Analytics\Presentation\State\Provider\GetProjectsByPeriodProvide
 
 #[
     ApiResource(
-        shortName: "Analytics",
+        shortName: 'Analytics',
         operations: [
             new Get(
-                uriTemplate: "/analytics/projects-by-period",
+                uriTemplate: '/analytics/projects-by-period',
                 provider: GetProjectsByPeriodProvider::class,
             ),
         ],
@@ -22,5 +22,7 @@ use App\Modules\Analytics\Presentation\State\Provider\GetProjectsByPeriodProvide
 ]
 final readonly class ProjectsByPeriodResource
 {
-    public function __construct(public array $data) {}
+    public function __construct(public array $data)
+    {
+    }
 }

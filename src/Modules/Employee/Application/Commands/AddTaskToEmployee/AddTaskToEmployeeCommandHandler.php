@@ -13,7 +13,8 @@ final readonly class AddTaskToEmployeeCommandHandler
 {
     public function __construct(
         private IEmployeeRepository $employeeRepository,
-    ) {}
+    ) {
+    }
 
     /**
      * @throws EmployeeNotFoundException
@@ -22,7 +23,7 @@ final readonly class AddTaskToEmployeeCommandHandler
     {
         $employee = $this->employeeRepository->findById($command->employeeId);
 
-        if ($employee === null) {
+        if (null === $employee) {
             throw new EmployeeNotFoundException($command->employeeId);
         }
 

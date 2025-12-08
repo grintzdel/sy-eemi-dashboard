@@ -23,7 +23,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 final class TempPasswordUser implements PasswordAuthenticatedUserInterface
 {
-    public function __construct(private readonly string $password) {}
+    public function __construct(private readonly string $password)
+    {
+    }
 
     public function getPassword(): ?string
     {
@@ -39,7 +41,8 @@ final readonly class CreateUserCommandHandler
         private IUserRepository $userRepository,
         private EmailUniquenessService $emailUniquenessService,
         private UserPasswordHasherInterface $passwordHasher,
-    ) {}
+    ) {
+    }
 
     /**
      * @throws InvalidUserNameException

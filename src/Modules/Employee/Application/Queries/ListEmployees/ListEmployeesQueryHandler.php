@@ -13,14 +13,15 @@ final readonly class ListEmployeesQueryHandler
 {
     public function __construct(
         private IEmployeeRepository $employeeRepository,
-    ) {}
+    ) {
+    }
 
     public function __invoke(ListEmployeesQuery $query): array
     {
         $employees = $this->employeeRepository->findAll();
 
         return array_map(
-            fn($employee) => new EmployeeViewModel(
+            fn ($employee) => new EmployeeViewModel(
                 $employee->getId(),
                 $employee->getFirstName(),
                 $employee->getLastName(),

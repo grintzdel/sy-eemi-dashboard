@@ -11,7 +11,9 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 final readonly class DeleteTaskCommandHandler
 {
-    public function __construct(private ITaskRepository $taskRepository) {}
+    public function __construct(private ITaskRepository $taskRepository)
+    {
+    }
 
     /**
      * @throws TaskNotFoundException
@@ -20,13 +22,13 @@ final readonly class DeleteTaskCommandHandler
     {
         $task = $this->taskRepository->findById($command->getId());
 
-        if ($task === null) {
+        if (null === $task) {
             throw TaskNotFoundException::withId($command->getId());
         }
 
         $this->taskRepository->delete($task);
 
-        return ["id" => $task->getId(), "deleted" => true];
+        return ['id' => $task->getId(), 'deleted' => true];
     }
 
     /**

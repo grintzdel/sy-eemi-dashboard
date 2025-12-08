@@ -14,7 +14,8 @@ final readonly class CreateEmployeeCommandHandler
 {
     public function __construct(
         private IEmployeeRepository $employeeRepository,
-    ) {}
+    ) {
+    }
 
     public function __invoke(CreateEmployeeCommand $command): string
     {

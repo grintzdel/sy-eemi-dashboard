@@ -26,7 +26,7 @@ final class GetUserByEmailProvider implements ProviderInterface
         array $context = [],
     ): UserResource {
         $viewModel = $this->handle(
-            new GetUserByEmailQuery($uriVariables["email"]),
+            new GetUserByEmailQuery($uriVariables['email']),
         );
 
         return new UserResource($viewModel);

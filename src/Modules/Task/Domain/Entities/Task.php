@@ -99,7 +99,7 @@ class Task
     public function unassignFromEmployee(string $employeeId): void
     {
         $this->assignedTo = array_values(
-            array_filter($this->assignedTo, fn($id) => $id !== $employeeId),
+            array_filter($this->assignedTo, fn ($id) => $id !== $employeeId),
         );
         $this->touch();
     }
@@ -131,7 +131,7 @@ class Task
 
     public function isDeleted(): bool
     {
-        return $this->deletedAt !== null;
+        return null !== $this->deletedAt;
     }
 
     private function touch(): void

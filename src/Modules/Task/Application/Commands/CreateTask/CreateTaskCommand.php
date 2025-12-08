@@ -8,31 +8,31 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class CreateTaskCommand
 {
-    #[Assert\NotBlank(message: "Task name is required")]
+    #[Assert\NotBlank(message: 'Task name is required')]
     #[
         Assert\Length(
             max: 255,
-            maxMessage: "Task name cannot exceed 255 characters",
+            maxMessage: 'Task name cannot exceed 255 characters',
         ),
     ]
     private string $name;
 
-    #[Assert\NotBlank(message: "Task description is required")]
+    #[Assert\NotBlank(message: 'Task description is required')]
     #[
         Assert\Length(
             max: 5000,
-            maxMessage: "Task description cannot exceed 5000 characters",
+            maxMessage: 'Task description cannot exceed 5000 characters',
         ),
     ]
     private string $description;
 
-    #[Assert\NotBlank(message: "Project ID is required")]
+    #[Assert\NotBlank(message: 'Project ID is required')]
     private string $projectId;
 
     #[
         Assert\Choice(
-            choices: ["TODO", "ON_GOING", "DONE"],
-            message: "Invalid status",
+            choices: ['TODO', 'ON_GOING', 'DONE'],
+            message: 'Invalid status',
         ),
     ]
     private ?string $status;

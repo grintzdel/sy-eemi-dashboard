@@ -11,10 +11,10 @@ use App\Modules\Analytics\Presentation\State\Provider\GetProjectsCompletedByPeri
 
 #[
     ApiResource(
-        shortName: "Analytics",
+        shortName: 'Analytics',
         operations: [
             new Get(
-                uriTemplate: "/analytics/projects-completed-by-period",
+                uriTemplate: '/analytics/projects-completed-by-period',
                 provider: GetProjectsCompletedByPeriodProvider::class,
             ),
         ],
@@ -23,5 +23,7 @@ use App\Modules\Analytics\Presentation\State\Provider\GetProjectsCompletedByPeri
 ]
 final readonly class ProjectsCompletedResource
 {
-    public function __construct(public ProjectsCompletedViewModel $data) {}
+    public function __construct(public ProjectsCompletedViewModel $data)
+    {
+    }
 }

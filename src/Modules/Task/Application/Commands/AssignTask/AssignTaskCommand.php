@@ -8,10 +8,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class AssignTaskCommand
 {
-    #[Assert\NotBlank(message: "Task ID is required")]
+    #[Assert\NotBlank(message: 'Task ID is required')]
     private string $taskId;
 
-    #[Assert\NotBlank(message: "Employee ID is required")]
+    #[Assert\NotBlank(message: 'Employee ID is required')]
     private string $employeeId;
 
     public function __construct(string $taskId, string $employeeId)

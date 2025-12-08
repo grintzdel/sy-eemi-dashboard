@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class DeleteTaskCommand
 {
-    #[Assert\NotBlank(message: "Task ID is required")]
+    #[Assert\NotBlank(message: 'Task ID is required')]
     private string $id;
 
     public function __construct(string $id)

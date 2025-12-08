@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Domain\Exceptions;
 
-use DomainException;
-
-final class UserNotFoundException extends DomainException
+final class UserNotFoundException extends \DomainException
 {
     public static function withId(string $id): self
     {

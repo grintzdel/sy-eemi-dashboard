@@ -13,7 +13,9 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 final readonly class GetUserQueryHandler
 {
-    public function __construct(private IUserRepository $userRepository) {}
+    public function __construct(private IUserRepository $userRepository)
+    {
+    }
 
     /**
      * @throws UserNotFoundException
@@ -23,7 +25,7 @@ final readonly class GetUserQueryHandler
         $userId = new UserId($query->getId());
         $user = $this->userRepository->findById($userId);
 
-        if ($user === null) {
+        if (null === $user) {
             throw UserNotFoundException::withId($query->getId());
         }
 

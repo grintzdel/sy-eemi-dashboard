@@ -21,7 +21,8 @@ final readonly class TaskViewModel
         public string $createdAt,
         public string $updatedAt,
         public ?string $deletedAt,
-    ) {}
+    ) {
+    }
 
     public static function fromEntity(Task $task): self
     {
@@ -32,9 +33,9 @@ final readonly class TaskViewModel
             projectId: $task->getProjectId(),
             status: $task->getStatus()->value,
             assignedTo: $task->getAssignedTo(),
-            createdAt: $task->getCreatedAt()->format("Y-m-d H:i:s"),
-            updatedAt: $task->getUpdatedAt()->format("Y-m-d H:i:s"),
-            deletedAt: $task->getDeletedAt()?->format("Y-m-d H:i:s"),
+            createdAt: $task->getCreatedAt()->format('Y-m-d H:i:s'),
+            updatedAt: $task->getUpdatedAt()->format('Y-m-d H:i:s'),
+            deletedAt: $task->getDeletedAt()?->format('Y-m-d H:i:s'),
         );
     }
 }

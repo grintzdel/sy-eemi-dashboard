@@ -13,13 +13,14 @@ final readonly class RemoveTaskFromProjectCommandHandler
 {
     public function __construct(
         private IProjectRepository $projectRepository,
-    ) {}
+    ) {
+    }
 
     public function __invoke(RemoveTaskFromProjectCommand $command): void
     {
         $project = $this->projectRepository->findById($command->projectId);
 
-        if ($project === null) {
+        if (null === $project) {
             throw new ProjectNotFoundException($command->projectId);
         }
 

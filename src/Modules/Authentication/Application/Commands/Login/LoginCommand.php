@@ -9,16 +9,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 final readonly class LoginCommand
 {
     public function __construct(
-        #[Assert\NotBlank(message: "Email cannot be empty")] #[
-            Assert\Email(message: "Email must be a valid email address"),
+        #[Assert\NotBlank(message: 'Email cannot be empty')] #[
+            Assert\Email(message: 'Email must be a valid email address'),
         ]
         private string $email,
 
         #[
-            Assert\NotBlank(message: "Password cannot be empty"),
+            Assert\NotBlank(message: 'Password cannot be empty'),
         ]
         private string $password,
-    ) {}
+    ) {
+    }
 
     public function getEmail(): string
     {

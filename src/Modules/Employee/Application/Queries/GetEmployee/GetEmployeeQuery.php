@@ -6,5 +6,7 @@ namespace App\Modules\Employee\Application\Queries\GetEmployee;
 
 final readonly class GetEmployeeQuery
 {
-    public function __construct(public string $id) {}
+    public function __construct(public string $id)
+    {
+    }
 }

@@ -28,7 +28,7 @@ final class UpdateEmployeeProcessor implements ProcessorInterface
         array $context = [],
     ): EmployeeResource {
         $command = new UpdateEmployeeCommand(
-            $uriVariables["id"],
+            $uriVariables['id'],
             $data->data->firstName,
             $data->data->lastName,
             $data->data->email,
@@ -37,7 +37,7 @@ final class UpdateEmployeeProcessor implements ProcessorInterface
 
         $this->handle($command);
 
-        $viewModel = $this->handle(new GetEmployeeQuery($uriVariables["id"]));
+        $viewModel = $this->handle(new GetEmployeeQuery($uriVariables['id']));
 
         return new EmployeeResource($viewModel);
     }

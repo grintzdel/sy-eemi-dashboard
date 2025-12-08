@@ -16,7 +16,8 @@ final readonly class CreateTaskCommandHandler
     public function __construct(
         private IIdProvider $idProvider,
         private ITaskRepository $taskRepository,
-    ) {}
+    ) {
+    }
 
     public function execute(CreateTaskCommand $command): array
     {
@@ -37,7 +38,7 @@ final readonly class CreateTaskCommandHandler
 
         $this->taskRepository->save($task);
 
-        return ["id" => $taskId];
+        return ['id' => $taskId];
     }
 
     public function __invoke(CreateTaskCommand $command): array

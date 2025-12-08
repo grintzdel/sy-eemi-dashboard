@@ -13,7 +13,8 @@ final readonly class EmailUniquenessService
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-    ) {}
+    ) {
+    }
 
     /**
      * @throws EmailAlreadyExistsException
@@ -24,15 +25,15 @@ final readonly class EmailUniquenessService
     ): void {
         $qb = $this->entityManager
             ->getRepository(UserEntity::class)
-            ->createQueryBuilder("u")
-            ->select("COUNT(u.id)")
-            ->where("u.email = :email")
-            ->andWhere("u.deletedAt IS NULL")
-            ->setParameter("email", $email->getValue());
+            ->createQueryBuilder('u')
+            ->select('COUNT(u.id)')
+            ->where('u.email = :email')
+            ->andWhere('u.deletedAt IS NULL')
+            ->setParameter('email', $email->getValue());
 
-        if ($excludeUserId !== null) {
-            $qb->andWhere("u.id != :userId")->setParameter(
-                "userId",
+        if (null !== $excludeUserId) {
+            $qb->andWhere('u.id != :userId')->setParameter(
+                'userId',
                 $excludeUserId,
             );
         }

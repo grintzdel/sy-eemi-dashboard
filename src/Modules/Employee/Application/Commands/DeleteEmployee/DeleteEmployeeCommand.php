@@ -10,5 +10,6 @@ final readonly class DeleteEmployeeCommand
 {
     public function __construct(
         #[Assert\NotBlank] #[Assert\Uuid] public string $id,
-    ) {}
+    ) {
+    }
 }

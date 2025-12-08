@@ -25,7 +25,7 @@ final class GetProjectProvider implements ProviderInterface
         array $uriVariables = [],
         array $context = [],
     ): ?ProjectResource {
-        $viewModel = $this->handle(new GetProjectQuery($uriVariables["id"]));
+        $viewModel = $this->handle(new GetProjectQuery($uriVariables['id']));
 
         return new ProjectResource($viewModel);
     }

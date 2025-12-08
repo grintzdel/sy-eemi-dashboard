@@ -27,9 +27,9 @@ final class UpdateUserProcessor implements ProcessorInterface
         array $context = [],
     ): UserResource {
         $command = new UpdateUserCommand(
-            id: $uriVariables["id"],
-            name: $data["name"],
-            email: $data["email"],
+            id: $uriVariables['id'],
+            name: $data['name'],
+            email: $data['email'],
         );
 
         $viewModel = $this->handle($command);

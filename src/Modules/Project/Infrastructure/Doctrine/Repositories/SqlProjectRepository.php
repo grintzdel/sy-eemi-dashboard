@@ -10,8 +10,7 @@ use App\Modules\Project\Infrastructure\Doctrine\Entities\ProjectEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-class SqlProjectRepository extends ServiceEntityRepository implements
-    IProjectRepository
+class SqlProjectRepository extends ServiceEntityRepository implements IProjectRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -29,10 +28,10 @@ class SqlProjectRepository extends ServiceEntityRepository implements
     public function findAll(): array
     {
         /** @var array<ProjectEntity> $projectEntities */
-        $projectEntities = $this->findBy(["deletedAt" => null]);
+        $projectEntities = $this->findBy(['deletedAt' => null]);
 
         return array_map(
-            fn(ProjectEntity $entity) => $this->toDomain($entity),
+            fn (ProjectEntity $entity) => $this->toDomain($entity),
             $projectEntities,
         );
     }
@@ -44,7 +43,7 @@ class SqlProjectRepository extends ServiceEntityRepository implements
         /** @var ProjectEntity|null $projectEntity */
         $projectEntity = $this->find($project->getId());
 
-        if ($projectEntity === null) {
+        if (null === $projectEntity) {
             $projectEntity = new ProjectEntity(
                 $project->getId(),
                 $project->getName(),
@@ -84,10 +83,10 @@ class SqlProjectRepository extends ServiceEntityRepository implements
 
         $reflection = new \ReflectionClass($project);
 
-        $updatedAtProperty = $reflection->getProperty("updatedAt");
+        $updatedAtProperty = $reflection->getProperty('updatedAt');
         $updatedAtProperty->setValue($project, $entity->getUpdatedAt());
 
-        $deletedAtProperty = $reflection->getProperty("deletedAt");
+        $deletedAtProperty = $reflection->getProperty('deletedAt');
         $deletedAtProperty->setValue($project, $entity->getDeletedAt());
 
         return $project;

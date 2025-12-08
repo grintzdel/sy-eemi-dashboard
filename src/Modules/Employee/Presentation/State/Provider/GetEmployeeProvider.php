@@ -25,7 +25,7 @@ final class GetEmployeeProvider implements ProviderInterface
         array $uriVariables = [],
         array $context = [],
     ): EmployeeResource {
-        $viewModel = $this->handle(new GetEmployeeQuery($uriVariables["id"]));
+        $viewModel = $this->handle(new GetEmployeeQuery($uriVariables['id']));
 
         return new EmployeeResource($viewModel);
     }

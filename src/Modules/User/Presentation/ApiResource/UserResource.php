@@ -18,7 +18,7 @@ use App\Modules\User\Presentation\State\Provider\ListUsersProvider;
 
 #[
     ApiResource(
-        shortName: "User",
+        shortName: 'User',
         operations: [
             new GetCollection(
                 security: 'is_granted("ROLE_ADMIN") or is_granted("ROLE_MODERATOR")',
@@ -29,7 +29,7 @@ use App\Modules\User\Presentation\State\Provider\ListUsersProvider;
                 provider: GetUserProvider::class,
             ),
             new Get(
-                uriTemplate: "/users/email/{email}",
+                uriTemplate: '/users/email/{email}',
                 provider: GetUserByEmailProvider::class,
             ),
             new Post(
@@ -46,5 +46,7 @@ use App\Modules\User\Presentation\State\Provider\ListUsersProvider;
 ]
 final readonly class UserResource
 {
-    public function __construct(public UserViewModel $data) {}
+    public function __construct(public UserViewModel $data)
+    {
+    }
 }

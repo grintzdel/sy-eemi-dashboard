@@ -11,5 +11,6 @@ final readonly class GetProjectsByPeriodQuery
     public function __construct(
         public PeriodType $period = PeriodType::MONTH,
         public ?int $year = null,
-    ) {}
+    ) {
+    }
 }

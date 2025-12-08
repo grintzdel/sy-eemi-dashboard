@@ -15,7 +15,8 @@ final readonly class UserViewModel
         public string $role,
         public string $createdAt,
         public string $updatedAt,
-    ) {}
+    ) {
+    }
 
     public static function fromEntity(User $user): self
     {
@@ -24,8 +25,8 @@ final readonly class UserViewModel
             name: $user->getName()->getValue(),
             email: $user->getEmail()->getValue(),
             role: $user->getRole()->value,
-            createdAt: $user->getCreatedAt()->format("Y-m-d H:i:s"),
-            updatedAt: $user->getUpdatedAt()->format("Y-m-d H:i:s"),
+            createdAt: $user->getCreatedAt()->format('Y-m-d H:i:s'),
+            updatedAt: $user->getUpdatedAt()->format('Y-m-d H:i:s'),
         );
     }
 }

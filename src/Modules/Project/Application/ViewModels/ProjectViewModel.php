@@ -16,5 +16,6 @@ final readonly class ProjectViewModel
         public array $taskIds,
         public \DateTimeImmutable $createdAt,
         public \DateTimeImmutable $updatedAt,
-    ) {}
+    ) {
+    }
 }

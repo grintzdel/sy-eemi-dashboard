@@ -6,7 +6,9 @@ namespace App\Modules\Authentication\Application\ViewModels;
 
 final readonly class TokenViewModel
 {
-    public function __construct(public string $token, public int $expiresIn) {}
+    public function __construct(public string $token, public int $expiresIn)
+    {
+    }
 
     public static function create(string $token, int $expiresIn): self
     {

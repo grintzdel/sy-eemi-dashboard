@@ -28,7 +28,7 @@ final class ListEmployeesProvider implements ProviderInterface
         $viewModels = $this->handle(new ListEmployeesQuery());
 
         return array_map(
-            fn($viewModel) => new EmployeeResource($viewModel),
+            fn ($viewModel) => new EmployeeResource($viewModel),
             $viewModels,
         );
     }

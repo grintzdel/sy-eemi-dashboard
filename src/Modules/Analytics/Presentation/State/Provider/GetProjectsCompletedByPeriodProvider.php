@@ -29,7 +29,7 @@ final class GetProjectsCompletedByPeriodProvider implements ProviderInterface
         $year = $request?->query->get('year');
 
         $period = PeriodType::fromString($periodValue);
-        $yearInt = $year !== null ? (int) $year : null;
+        $yearInt = null !== $year ? (int) $year : null;
 
         $query = new GetProjectsCompletedByPeriodQuery(
             period: $period,

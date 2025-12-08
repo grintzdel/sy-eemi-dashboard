@@ -76,7 +76,7 @@ class Project
     public function removeTask(string $taskId): void
     {
         $this->taskIds = array_values(
-            array_filter($this->taskIds, fn(string $id) => $id !== $taskId),
+            array_filter($this->taskIds, fn (string $id) => $id !== $taskId),
         );
         $this->updatedAt = new \DateTimeImmutable();
     }
@@ -97,10 +97,10 @@ class Project
         $hasInProgress = false;
 
         foreach ($taskStatuses as $status) {
-            if ($status === Status::ON_GOING) {
+            if (Status::ON_GOING === $status) {
                 $hasInProgress = true;
                 $allDone = false;
-            } elseif ($status === Status::TODO) {
+            } elseif (Status::TODO === $status) {
                 $allDone = false;
             }
         }

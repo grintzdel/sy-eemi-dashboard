@@ -25,7 +25,7 @@ final class GetTaskProvider implements ProviderInterface
         array $uriVariables = [],
         array $context = [],
     ): TaskResource {
-        $viewModel = $this->handle(new GetTaskQuery($uriVariables["id"]));
+        $viewModel = $this->handle(new GetTaskQuery($uriVariables['id']));
 
         return new TaskResource($viewModel);
     }

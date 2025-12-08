@@ -15,7 +15,7 @@ final readonly class TaskDescription
         Assert::maxLength(
             $value,
             5000,
-            "Task description cannot exceed 5000 characters",
+            'Task description cannot exceed 5000 characters',
         );
 
         $this->value = $value;

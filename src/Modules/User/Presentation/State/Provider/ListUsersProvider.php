@@ -28,7 +28,7 @@ final class ListUsersProvider implements ProviderInterface
         $viewModels = $this->handle(new ListUsersQuery());
 
         return array_map(
-            fn($viewModel) => new UserResource($viewModel),
+            fn ($viewModel) => new UserResource($viewModel),
             $viewModels,
         );
     }

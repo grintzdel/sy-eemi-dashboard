@@ -14,7 +14,8 @@ final readonly class GetEmployeeQueryHandler
 {
     public function __construct(
         private IEmployeeRepository $employeeRepository,
-    ) {}
+    ) {
+    }
 
     /**
      * @throws EmployeeNotFoundException
@@ -23,7 +24,7 @@ final readonly class GetEmployeeQueryHandler
     {
         $employee = $this->employeeRepository->findById($query->id);
 
-        if ($employee === null) {
+        if (null === $employee) {
             throw new EmployeeNotFoundException($query->id);
         }
 

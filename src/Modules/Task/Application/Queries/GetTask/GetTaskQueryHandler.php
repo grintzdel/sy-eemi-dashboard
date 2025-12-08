@@ -12,7 +12,9 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 final readonly class GetTaskQueryHandler
 {
-    public function __construct(private ITaskRepository $taskRepository) {}
+    public function __construct(private ITaskRepository $taskRepository)
+    {
+    }
 
     /**
      * @throws TaskNotFoundException
@@ -21,7 +23,7 @@ final readonly class GetTaskQueryHandler
     {
         $task = $this->taskRepository->findById($query->id);
 
-        if ($task === null) {
+        if (null === $task) {
             throw TaskNotFoundException::withId($query->id);
         }
 

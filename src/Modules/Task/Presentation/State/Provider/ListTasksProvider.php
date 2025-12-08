@@ -28,7 +28,7 @@ final class ListTasksProvider implements ProviderInterface
         $viewModels = $this->handle(new ListTasksQuery());
 
         return array_map(
-            fn($viewModel) => new TaskResource($viewModel),
+            fn ($viewModel) => new TaskResource($viewModel),
             $viewModels,
         );
     }

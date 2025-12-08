@@ -28,14 +28,14 @@ final class UpdateTaskProcessor implements ProcessorInterface
         array $context = [],
     ): TaskResource {
         $command = new UpdateTaskCommand(
-            id: $uriVariables["id"],
-            name: $data["name"],
-            description: $data["description"],
+            id: $uriVariables['id'],
+            name: $data['name'],
+            description: $data['description'],
         );
 
         $this->handle($command);
 
-        $viewModel = $this->handle(new GetTaskQuery($uriVariables["id"]));
+        $viewModel = $this->handle(new GetTaskQuery($uriVariables['id']));
 
         return new TaskResource($viewModel);
     }

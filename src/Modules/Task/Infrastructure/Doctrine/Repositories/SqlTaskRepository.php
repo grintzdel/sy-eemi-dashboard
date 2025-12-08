@@ -11,8 +11,7 @@ use App\Modules\Task\Infrastructure\Doctrine\Entities\TaskEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-class SqlTaskRepository extends ServiceEntityRepository implements
-    ITaskRepository
+class SqlTaskRepository extends ServiceEntityRepository implements ITaskRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,10 +29,10 @@ class SqlTaskRepository extends ServiceEntityRepository implements
     public function findAll(): array
     {
         /** @var array<TaskEntity> $taskEntities */
-        $taskEntities = $this->findBy(["deletedAt" => null]);
+        $taskEntities = $this->findBy(['deletedAt' => null]);
 
         return array_map(
-            fn(TaskEntity $entity) => $this->toDomain($entity),
+            fn (TaskEntity $entity) => $this->toDomain($entity),
             $taskEntities,
         );
     }
@@ -42,28 +41,28 @@ class SqlTaskRepository extends ServiceEntityRepository implements
     {
         /** @var array<TaskEntity> $taskEntities */
         $taskEntities = $this->findBy([
-            "projectId" => $projectId,
-            "deletedAt" => null,
+            'projectId' => $projectId,
+            'deletedAt' => null,
         ]);
 
         return array_map(
-            fn(TaskEntity $entity) => $this->toDomain($entity),
+            fn (TaskEntity $entity) => $this->toDomain($entity),
             $taskEntities,
         );
     }
 
     public function findByEmployeeId(string $employeeId): array
     {
-        $qb = $this->createQueryBuilder("t");
-        $qb->where("JSON_CONTAINS(t.assignedTo, :employeeId) = 1")
-            ->andWhere("t.deletedAt IS NULL")
-            ->setParameter("employeeId", json_encode($employeeId));
+        $qb = $this->createQueryBuilder('t');
+        $qb->where('JSON_CONTAINS(t.assignedTo, :employeeId) = 1')
+            ->andWhere('t.deletedAt IS NULL')
+            ->setParameter('employeeId', json_encode($employeeId));
 
         /** @var array<TaskEntity> $taskEntities */
         $taskEntities = $qb->getQuery()->getResult();
 
         return array_map(
-            fn(TaskEntity $entity) => $this->toDomain($entity),
+            fn (TaskEntity $entity) => $this->toDomain($entity),
             $taskEntities,
         );
     }
@@ -75,7 +74,7 @@ class SqlTaskRepository extends ServiceEntityRepository implements
         /** @var TaskEntity|null $taskEntity */
         $taskEntity = $this->find($task->getId());
 
-        if ($taskEntity === null) {
+        if (null === $taskEntity) {
             $taskEntity = new TaskEntity(
                 $task->getId(),
                 $task->getName(),
@@ -121,10 +120,10 @@ class SqlTaskRepository extends ServiceEntityRepository implements
 
         $reflection = new \ReflectionClass($task);
 
-        $updatedAtProperty = $reflection->getProperty("updatedAt");
+        $updatedAtProperty = $reflection->getProperty('updatedAt');
         $updatedAtProperty->setValue($task, $entity->getUpdatedAt());
 
-        $deletedAtProperty = $reflection->getProperty("deletedAt");
+        $deletedAtProperty = $reflection->getProperty('deletedAt');
         $deletedAtProperty->setValue($task, $entity->getDeletedAt());
 
         return $task;

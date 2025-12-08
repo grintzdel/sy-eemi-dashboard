@@ -17,7 +17,7 @@ final class EmployeeFixtures extends Fixture
 
     public function __construct()
     {
-        $this->faker = Factory::create("fr_FR");
+        $this->faker = Factory::create('fr_FR');
     }
 
     /**
@@ -26,19 +26,19 @@ final class EmployeeFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $positions = [
-            "Développeur Full Stack",
-            "Développeur Frontend",
-            "Développeur Backend",
-            "DevOps Engineer",
-            "Chef de Projet",
-            "Product Owner",
-            "Scrum Master",
-            "Designer UI/UX",
-            "Data Analyst",
-            "QA Engineer",
+            'Développeur Full Stack',
+            'Développeur Frontend',
+            'Développeur Backend',
+            'DevOps Engineer',
+            'Chef de Projet',
+            'Product Owner',
+            'Scrum Master',
+            'Designer UI/UX',
+            'Data Analyst',
+            'QA Engineer',
         ];
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 20; ++$i) {
             $createdAt = $this->getRandomDateInLast12Months();
 
             $employee = new EmployeeEntity(
@@ -53,10 +53,10 @@ final class EmployeeFixtures extends Fixture
             );
 
             $manager->persist($employee);
-            $this->addReference("employee_" . $i, $employee);
+            $this->addReference('employee_'.$i, $employee);
         }
 
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 3; ++$i) {
             $createdAt = $this->getRandomDateInLast12Months();
 
             $deletedEmployee = new EmployeeEntity(
@@ -71,7 +71,7 @@ final class EmployeeFixtures extends Fixture
             );
 
             $reflection = new \ReflectionClass($deletedEmployee);
-            $property = $reflection->getProperty("deletedAt");
+            $property = $reflection->getProperty('deletedAt');
             $property->setValue($deletedEmployee, new \DateTimeImmutable());
 
             $manager->persist($deletedEmployee);

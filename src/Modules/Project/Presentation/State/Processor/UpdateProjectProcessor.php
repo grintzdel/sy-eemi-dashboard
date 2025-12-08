@@ -28,14 +28,14 @@ final class UpdateProjectProcessor implements ProcessorInterface
         array $context = [],
     ): ProjectResource {
         $command = new UpdateProjectCommand(
-            $uriVariables["id"],
+            $uriVariables['id'],
             $data->data->name,
             $data->data->description,
         );
 
         $this->handle($command);
 
-        $viewModel = $this->handle(new GetProjectQuery($uriVariables["id"]));
+        $viewModel = $this->handle(new GetProjectQuery($uriVariables['id']));
 
         return new ProjectResource($viewModel);
     }

@@ -90,7 +90,7 @@ final class Employee
     public function removeTask(string $taskId): void
     {
         $index = array_search($taskId, $this->taskIds, true);
-        if ($index !== false) {
+        if (false !== $index) {
             array_splice($this->taskIds, $index, 1);
             $this->updatedAt = new \DateTimeImmutable();
         }
@@ -104,6 +104,6 @@ final class Employee
 
     public function isDeleted(): bool
     {
-        return $this->deletedAt !== null;
+        return null !== $this->deletedAt;
     }
 }

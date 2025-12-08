@@ -8,27 +8,27 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class UpdateUserCommand
 {
-    #[Assert\NotBlank(message: "User ID is required")]
-    #[Assert\Uuid(message: "User ID must be a valid UUID")]
+    #[Assert\NotBlank(message: 'User ID is required')]
+    #[Assert\Uuid(message: 'User ID must be a valid UUID')]
     private string $id;
 
-    #[Assert\NotBlank(message: "Username is required")]
+    #[Assert\NotBlank(message: 'Username is required')]
     #[
         Assert\Length(
             min: 3,
             max: 50,
-            minMessage: "Username must be at least {{ limit }} characters",
-            maxMessage: "Username cannot exceed {{ limit }} characters",
+            minMessage: 'Username must be at least {{ limit }} characters',
+            maxMessage: 'Username cannot exceed {{ limit }} characters',
         ),
     ]
     private string $name;
 
-    #[Assert\NotBlank(message: "Email is required")]
-    #[Assert\Email(message: "Email must be a valid email address")]
+    #[Assert\NotBlank(message: 'Email is required')]
+    #[Assert\Email(message: 'Email must be a valid email address')]
     #[
         Assert\Length(
             max: 255,
-            maxMessage: "Email cannot exceed {{ limit }} characters",
+            maxMessage: 'Email cannot exceed {{ limit }} characters',
         ),
     ]
     private string $email;

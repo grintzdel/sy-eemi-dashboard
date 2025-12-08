@@ -25,7 +25,7 @@ final class DeleteEmployeeProcessor implements ProcessorInterface
         array $uriVariables = [],
         array $context = [],
     ): void {
-        $command = new DeleteEmployeeCommand($uriVariables["id"]);
+        $command = new DeleteEmployeeCommand($uriVariables['id']);
 
         $this->handle($command);
     }

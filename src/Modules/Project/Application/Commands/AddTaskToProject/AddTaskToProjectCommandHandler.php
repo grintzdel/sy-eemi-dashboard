@@ -13,13 +13,14 @@ final readonly class AddTaskToProjectCommandHandler
 {
     public function __construct(
         private IProjectRepository $projectRepository,
-    ) {}
+    ) {
+    }
 
     public function __invoke(AddTaskToProjectCommand $command): void
     {
         $project = $this->projectRepository->findById($command->projectId);
 
-        if ($project === null) {
+        if (null === $project) {
             throw new ProjectNotFoundException($command->projectId);
         }
 

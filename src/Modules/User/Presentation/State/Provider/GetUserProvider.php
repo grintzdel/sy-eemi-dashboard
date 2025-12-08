@@ -25,7 +25,7 @@ final class GetUserProvider implements ProviderInterface
         array $uriVariables = [],
         array $context = [],
     ): UserResource {
-        $viewModel = $this->handle(new GetUserQuery($uriVariables["id"]));
+        $viewModel = $this->handle(new GetUserQuery($uriVariables['id']));
 
         return new UserResource($viewModel);
     }

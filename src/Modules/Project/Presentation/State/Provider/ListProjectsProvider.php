@@ -28,7 +28,7 @@ final class ListProjectsProvider implements ProviderInterface
         $viewModels = $this->handle(new ListProjectsQuery());
 
         return array_map(
-            fn($viewModel) => new ProjectResource($viewModel),
+            fn ($viewModel) => new ProjectResource($viewModel),
             $viewModels,
         );
     }

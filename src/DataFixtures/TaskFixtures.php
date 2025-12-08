@@ -21,7 +21,7 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
 
     public function __construct()
     {
-        $this->faker = Factory::create("fr_FR");
+        $this->faker = Factory::create('fr_FR');
     }
 
     public function getDependencies(): array
@@ -36,24 +36,24 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
     {
         $taskTemplates = [
             [
-                "Analyse des besoins",
-                "Recueillir et analyser les besoins utilisateurs",
+                'Analyse des besoins',
+                'Recueillir et analyser les besoins utilisateurs',
             ],
-            ["Design UI/UX", "Créer les maquettes et wireframes"],
-            ["Développement frontend", 'Implémenter l\'interface utilisateur'],
-            ["Développement backend", "Créer les API et la logique métier"],
-            ["Tests unitaires", "Écrire et exécuter les tests unitaires"],
+            ['Design UI/UX', 'Créer les maquettes et wireframes'],
+            ['Développement frontend', 'Implémenter l\'interface utilisateur'],
+            ['Développement backend', 'Créer les API et la logique métier'],
+            ['Tests unitaires', 'Écrire et exécuter les tests unitaires'],
             ['Tests d\'intégration', 'Valider l\'intégration des composants'],
-            ["Documentation technique", "Rédiger la documentation du code"],
-            ["Revue de code", "Examiner et valider le code produit"],
-            ["Déploiement", "Mettre en production la nouvelle version"],
-            ["Formation utilisateurs", "Former les utilisateurs finaux"],
+            ['Documentation technique', 'Rédiger la documentation du code'],
+            ['Revue de code', 'Examiner et valider le code produit'],
+            ['Déploiement', 'Mettre en production la nouvelle version'],
+            ['Formation utilisateurs', 'Former les utilisateurs finaux'],
         ];
 
         $employees = [];
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 20; ++$i) {
             $employees[] = $this->getReference(
-                "employee_" . $i,
+                'employee_'.$i,
                 EmployeeEntity::class,
             );
         }
@@ -82,9 +82,9 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
             12,
         );
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 10; ++$i) {
             $project = $this->getReference(
-                "project_2024_" . rand(1, 12) . "_0",
+                'project_2024_'.rand(1, 12).'_0',
                 ProjectEntity::class,
             );
             $template = $taskTemplates[array_rand($taskTemplates)];
@@ -92,7 +92,7 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
 
             $deletedTask = new TaskEntity(
                 id: Uuid::v4()->toString(),
-                name: "[DELETED] " . $template[0],
+                name: '[DELETED] '.$template[0],
                 description: $template[1],
                 projectId: $project->getId(),
                 status: Status::TODO->value,
@@ -102,7 +102,7 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
             );
 
             $reflection = new \ReflectionClass($deletedTask);
-            $property = $reflection->getProperty("deletedAt");
+            $property = $reflection->getProperty('deletedAt');
             $property->setValue($deletedTask, new \DateTimeImmutable());
 
             $manager->persist($deletedTask);
@@ -114,6 +114,7 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
     private function getRandomEmployees(array $employees, int $count): array
     {
         shuffle($employees);
+
         return array_slice($employees, 0, $count);
     }
 
@@ -131,10 +132,10 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
         int $minTasks,
         int $maxTasks,
     ): void {
-        for ($month = 1; $month <= $maxMonth; $month++) {
+        for ($month = 1; $month <= $maxMonth; ++$month) {
             $projectsThisMonth = rand($minProjects, $maxProjects);
 
-            for ($p = 0; $p < $projectsThisMonth; $p++) {
+            for ($p = 0; $p < $projectsThisMonth; ++$p) {
                 $projectRef = "project_{$year}_{$month}_{$p}";
 
                 if (!$this->hasReference($projectRef, ProjectEntity::class)) {
@@ -148,14 +149,14 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
                 $tasksCount = rand($minTasks, $maxTasks);
                 $taskIds = [];
 
-                for ($t = 0; $t < $tasksCount; $t++) {
+                for ($t = 0; $t < $tasksCount; ++$t) {
                     $template = $taskTemplates[array_rand($taskTemplates)];
                     $assignedEmployees = $this->getRandomEmployees(
                         $employees,
                         rand(1, 3),
                     );
                     $assignedTo = array_map(
-                        fn($emp) => $emp->getId(),
+                        fn ($emp) => $emp->getId(),
                         $assignedEmployees,
                     );
                     $status = $this->determineStatus($t, $tasksCount);
@@ -163,9 +164,9 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
 
                     $task = new TaskEntity(
                         id: Uuid::v4()->toString(),
-                        name: $template[0] . " #" . ($t + 1),
-                        description: $template[1] .
-                            ". " .
+                        name: $template[0].' #'.($t + 1),
+                        description: $template[1].
+                            '. '.
                             $this->faker->sentence(),
                         projectId: $project->getId(),
                         status: $status->value,
@@ -200,7 +201,7 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
             $currentTaskIds[] = $taskId;
 
             $reflection = new \ReflectionClass($employee);
-            $property = $reflection->getProperty("taskIds");
+            $property = $reflection->getProperty('taskIds');
             $property->setValue($employee, $currentTaskIds);
         }
     }
@@ -213,7 +214,7 @@ final class TaskFixtures extends Fixture implements DependentFixtureInterface
         array $taskIds,
     ): void {
         $reflection = new \ReflectionClass($project);
-        $property = $reflection->getProperty("taskIds");
+        $property = $reflection->getProperty('taskIds');
         $property->setValue($project, $taskIds);
     }
 

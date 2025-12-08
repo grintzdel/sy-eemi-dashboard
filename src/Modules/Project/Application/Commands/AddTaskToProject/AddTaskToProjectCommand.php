@@ -10,13 +10,14 @@ final readonly class AddTaskToProjectCommand
 {
     public function __construct(
         #[
-            Assert\NotBlank(message: "Project ID is required"),
+            Assert\NotBlank(message: 'Project ID is required'),
         ]
         public string $projectId,
 
         #[
-            Assert\NotBlank(message: "Task ID is required"),
+            Assert\NotBlank(message: 'Task ID is required'),
         ]
         public string $taskId,
-    ) {}
+    ) {
+    }
 }

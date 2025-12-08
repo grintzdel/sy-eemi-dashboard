@@ -4,47 +4,46 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Infrastructure\Doctrine\Entities;
 
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity]
-#[ORM\Table(name: "users")]
+#[ORM\Table(name: 'users')]
 class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\Column(type: "string", length: 36)]
+    #[ORM\Column(type: 'string', length: 36)]
     private string $id;
 
-    #[ORM\Column(type: "string", length: 50)]
+    #[ORM\Column(type: 'string', length: 50)]
     private string $name;
 
-    #[ORM\Column(type: "string", length: 255, unique: true)]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     private string $email;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $password;
 
-    #[ORM\Column(type: "string", length: 50)]
+    #[ORM\Column(type: 'string', length: 50)]
     private string $role;
 
-    #[ORM\Column(name: "created_at", type: "datetime_immutable")]
-    private DateTimeImmutable $createdAt;
+    #[ORM\Column(name: 'created_at', type: 'datetime_immutable')]
+    private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(name: "updated_at", type: "datetime_immutable")]
-    private DateTimeImmutable $updatedAt;
+    #[ORM\Column(name: 'updated_at', type: 'datetime_immutable')]
+    private \DateTimeImmutable $updatedAt;
 
     #[
         ORM\Column(
-            name: "deleted_at",
-            type: "datetime_immutable",
+            name: 'deleted_at',
+            type: 'datetime_immutable',
             nullable: true,
         ),
     ]
-    private ?DateTimeImmutable $deletedAt;
+    private ?\DateTimeImmutable $deletedAt;
 
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $avatar;
 
     public function __construct(
@@ -53,9 +52,9 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
         string $email,
         string $password,
         string $role,
-        DateTimeImmutable $createdAt,
-        DateTimeImmutable $updatedAt,
-        ?DateTimeImmutable $deletedAt = null,
+        \DateTimeImmutable $createdAt,
+        \DateTimeImmutable $updatedAt,
+        ?\DateTimeImmutable $deletedAt = null,
         ?string $avatar = null,
     ) {
         $this->id = $id;
@@ -79,7 +78,9 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
         return [$this->role];
     }
 
-    public function eraseCredentials(): void {}
+    public function eraseCredentials(): void
+    {
+    }
 
     public function getPassword(): string
     {
@@ -126,27 +127,27 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
         $this->role = $role;
     }
 
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): DateTimeImmutable
+    public function getUpdatedAt(): \DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    public function getDeletedAt(): ?DateTimeImmutable
+    public function getDeletedAt(): ?\DateTimeImmutable
     {
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(?DateTimeImmutable $deletedAt): void
+    public function setDeletedAt(?\DateTimeImmutable $deletedAt): void
     {
         $this->deletedAt = $deletedAt;
     }

@@ -6,10 +6,10 @@ namespace App\Modules\Analytics\Domain\ValueObjects;
 
 enum PeriodType: string
 {
-    case MONTH = "month";
-    case WEEK = "week";
-    case DAY = "day";
-    case YEAR = "year";
+    case MONTH = 'month';
+    case WEEK = 'week';
+    case DAY = 'day';
+    case YEAR = 'year';
 
     public static function default(): self
     {
@@ -18,7 +18,7 @@ enum PeriodType: string
 
     public static function fromString(?string $value): self
     {
-        if ($value === null) {
+        if (null === $value) {
             return self::default();
         }
 
@@ -38,12 +38,9 @@ enum PeriodType: string
     public function getSqlSelectExpression(string $dateColumn): string
     {
         return match ($this) {
-            self::MONTH
-                => "MONTH({$dateColumn}) as period_number, YEAR({$dateColumn}) as year",
-            self::WEEK
-                => "WEEK({$dateColumn}) as period_number, YEAR({$dateColumn}) as year",
-            self::DAY
-                => "DAY({$dateColumn}) as period_number, MONTH({$dateColumn}) as month, YEAR({$dateColumn}) as year",
+            self::MONTH => "MONTH({$dateColumn}) as period_number, YEAR({$dateColumn}) as year",
+            self::WEEK => "WEEK({$dateColumn}) as period_number, YEAR({$dateColumn}) as year",
+            self::DAY => "DAY({$dateColumn}) as period_number, MONTH({$dateColumn}) as month, YEAR({$dateColumn}) as year",
             self::YEAR => "YEAR({$dateColumn}) as period_number",
         };
     }
@@ -51,10 +48,10 @@ enum PeriodType: string
     public function getLabel(): string
     {
         return match ($this) {
-            self::MONTH => "Monthly",
-            self::WEEK => "Weekly",
-            self::DAY => "Daily",
-            self::YEAR => "Yearly",
+            self::MONTH => 'Monthly',
+            self::WEEK => 'Weekly',
+            self::DAY => 'Daily',
+            self::YEAR => 'Yearly',
         };
     }
 }

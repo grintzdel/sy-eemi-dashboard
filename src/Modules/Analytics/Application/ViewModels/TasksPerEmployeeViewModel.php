@@ -16,5 +16,6 @@ final readonly class TasksPerEmployeeViewModel
         public int $inProgressTasks,
         public int $todoTasks,
         public float $completionRate,
-    ) {}
+    ) {
+    }
 }

@@ -10,7 +10,7 @@ final readonly class AddTaskToEmployeeCommand
 {
     public function __construct(
         #[Assert\NotBlank] #[Assert\Uuid] public string $employeeId,
-
         #[Assert\NotBlank] #[Assert\Uuid] public string $taskId,
-    ) {}
+    ) {
+    }
 }

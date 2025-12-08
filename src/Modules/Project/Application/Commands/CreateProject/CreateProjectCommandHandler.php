@@ -14,7 +14,8 @@ final readonly class CreateProjectCommandHandler
 {
     public function __construct(
         private IProjectRepository $projectRepository,
-    ) {}
+    ) {
+    }
 
     public function __invoke(CreateProjectCommand $command): string
     {

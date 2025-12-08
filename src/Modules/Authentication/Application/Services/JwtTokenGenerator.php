@@ -10,7 +10,9 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 final readonly class JwtTokenGenerator
 {
-    public function __construct(private JWTTokenManagerInterface $jwtManager) {}
+    public function __construct(private JWTTokenManagerInterface $jwtManager)
+    {
+    }
 
     public function generateToken(User $user): string
     {

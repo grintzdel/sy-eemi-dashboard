@@ -13,7 +13,8 @@ final readonly class UpdateEmployeeCommandHandler
 {
     public function __construct(
         private IEmployeeRepository $employeeRepository,
-    ) {}
+    ) {
+    }
 
     /**
      * @throws EmployeeNotFoundException
@@ -22,7 +23,7 @@ final readonly class UpdateEmployeeCommandHandler
     {
         $employee = $this->employeeRepository->findById($command->id);
 
-        if ($employee === null) {
+        if (null === $employee) {
             throw new EmployeeNotFoundException($command->id);
         }
 

@@ -19,7 +19,7 @@ use App\Modules\Task\Presentation\State\Provider\ListTasksProvider;
 
 #[
     ApiResource(
-        shortName: "Task",
+        shortName: 'Task',
         operations: [
             new GetCollection(provider: ListTasksProvider::class),
             new Get(provider: GetTaskProvider::class),
@@ -32,5 +32,7 @@ use App\Modules\Task\Presentation\State\Provider\ListTasksProvider;
 ]
 final readonly class TaskResource
 {
-    public function __construct(public TaskViewModel $data) {}
+    public function __construct(public TaskViewModel $data)
+    {
+    }
 }

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Domain\Exceptions;
 
-use DomainException;
-
-final class EmailAlreadyExistsException extends DomainException
+final class EmailAlreadyExistsException extends \DomainException
 {
     public static function withEmail(string $email): self
     {
