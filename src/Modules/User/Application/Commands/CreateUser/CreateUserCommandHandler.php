@@ -7,6 +7,7 @@ namespace App\Modules\User\Application\Commands\CreateUser;
 use App\Modules\Shared\Application\Ports\Services\IIdProvider;
 use App\Modules\Shared\Domain\Enums\Roles;
 use App\Modules\Shared\Domain\ValueObjects\UserId;
+use App\Modules\User\Application\Services\TempPasswordUser;
 use App\Modules\User\Application\ViewModels\UserViewModel;
 use App\Modules\User\Domain\Entities\User;
 use App\Modules\User\Domain\Exceptions\EmailAlreadyExistsException;
@@ -19,19 +20,6 @@ use App\Modules\User\Domain\ValueObjects\UserName;
 use App\Modules\User\Infrastructure\Services\EmailUniquenessService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-
-final class TempPasswordUser implements PasswordAuthenticatedUserInterface
-{
-    public function __construct(private readonly string $password)
-    {
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-}
 
 #[AsMessageHandler]
 final readonly class CreateUserCommandHandler

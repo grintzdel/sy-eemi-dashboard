@@ -4,3 +4,7 @@ controllers:
     schemes:
         - HTTP
         - HTTPS
+    exclude:
+        - '../src/Modules/*/Application/Commands/**'
+        - '../src/Modules/*/Domain/**'
+        - '../src/Modules/*/Infrastructure/**'
