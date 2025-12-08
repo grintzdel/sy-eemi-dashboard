@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\DataFixtures;
+
 use App\Modules\Shared\Domain\Enums\Roles;
 use App\Modules\User\Infrastructure\Doctrine\Entities\UserEntity;
 use Doctrine\Bundle\FixturesBundle\Fixture;
