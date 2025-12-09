@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Employee\Infrastructure\Doctrine\Entities;
 
+use App\Modules\Shared\Domain\Enums\EmployeeStatus;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -26,8 +27,14 @@ class EmployeeEntity
     #[ORM\Column(type: 'string', length: 255)]
     private string $position;
 
+    #[ORM\Column(type: 'string', length: 500)]
+    private string $avatar;
+
     #[ORM\Column(type: 'json')]
     private array $taskIds = [];
+
+    #[ORM\Column(type: 'string', enumType: EmployeeStatus::class)]
+    private EmployeeStatus $status;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
@@ -44,7 +51,9 @@ class EmployeeEntity
         string $lastName,
         string $email,
         string $position,
+        string $avatar,
         array $taskIds,
+        EmployeeStatus $status,
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt,
     ) {
@@ -53,7 +62,9 @@ class EmployeeEntity
         $this->lastName = $lastName;
         $this->email = $email;
         $this->position = $position;
+        $this->avatar = $avatar;
         $this->taskIds = $taskIds;
+        $this->status = $status;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
     }
@@ -103,6 +114,16 @@ class EmployeeEntity
         $this->position = $position;
     }
 
+    public function getAvatar(): string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): void
+    {
+        $this->avatar = $avatar;
+    }
+
     public function getTaskIds(): array
     {
         return $this->taskIds;
@@ -111,6 +132,16 @@ class EmployeeEntity
     public function setTaskIds(array $taskIds): void
     {
         $this->taskIds = $taskIds;
+    }
+
+    public function getStatus(): EmployeeStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(EmployeeStatus $status): void
+    {
+        $this->status = $status;
     }
 
     public function getCreatedAt(): \DateTimeImmutable

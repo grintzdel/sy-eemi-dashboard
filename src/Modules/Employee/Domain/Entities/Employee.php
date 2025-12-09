@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Employee\Domain\Entities;
 
+use App\Modules\Shared\Domain\Enums\EmployeeStatus;
+
 final class Employee
 {
     private \DateTimeImmutable $updatedAt;
@@ -15,7 +17,9 @@ final class Employee
         private string $lastName,
         private string $email,
         private string $position,
+        private string $avatar,
         private array $taskIds = [],
+        private EmployeeStatus $status = EmployeeStatus::ACTIVE,
         private readonly \DateTimeImmutable $createdAt = new \DateTimeImmutable(),
     ) {
         $this->updatedAt = new \DateTimeImmutable();
@@ -46,6 +50,17 @@ final class Employee
         return $this->position;
     }
 
+    public function getAvatar(): string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): void
+    {
+        $this->avatar = $avatar;
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
     public function getTaskIds(): array
     {
         return $this->taskIds;
@@ -64,6 +79,17 @@ final class Employee
     public function getDeletedAt(): ?\DateTimeImmutable
     {
         return $this->deletedAt;
+    }
+
+    public function getStatus(): EmployeeStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(EmployeeStatus $status): void
+    {
+        $this->status = $status;
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function update(

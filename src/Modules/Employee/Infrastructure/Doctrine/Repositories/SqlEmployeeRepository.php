@@ -7,6 +7,7 @@ namespace App\Modules\Employee\Infrastructure\Doctrine\Repositories;
 use App\Modules\Employee\Domain\Entities\Employee;
 use App\Modules\Employee\Domain\Repositories\IEmployeeRepository;
 use App\Modules\Employee\Infrastructure\Doctrine\Entities\EmployeeEntity;
+use App\Modules\Shared\Domain\Enums\EmployeeStatus;
 use Doctrine\ORM\EntityManagerInterface;
 
 final readonly class SqlEmployeeRepository implements IEmployeeRepository
@@ -37,6 +38,13 @@ final readonly class SqlEmployeeRepository implements IEmployeeRepository
         );
     }
 
+    public function countActiveEmployees(): int
+    {
+        return (int) $this->entityManager
+            ->getRepository(EmployeeEntity::class)
+            ->count(['status' => EmployeeStatus::ACTIVE, 'deletedAt' => null]);
+    }
+
     public function save(Employee $employee): void
     {
         $entity = $this->entityManager
@@ -50,7 +58,9 @@ final readonly class SqlEmployeeRepository implements IEmployeeRepository
                 $employee->getLastName(),
                 $employee->getEmail(),
                 $employee->getPosition(),
+                $employee->getAvatar(),
                 $employee->getTaskIds(),
+                $employee->getStatus(),
                 $employee->getCreatedAt(),
                 $employee->getUpdatedAt(),
             );
@@ -60,7 +70,9 @@ final readonly class SqlEmployeeRepository implements IEmployeeRepository
             $entity->setLastName($employee->getLastName());
             $entity->setEmail($employee->getEmail());
             $entity->setPosition($employee->getPosition());
+            $entity->setAvatar($employee->getAvatar());
             $entity->setTaskIds($employee->getTaskIds());
+            $entity->setStatus($employee->getStatus());
             $entity->setUpdatedAt($employee->getUpdatedAt());
         }
 
@@ -87,7 +99,9 @@ final readonly class SqlEmployeeRepository implements IEmployeeRepository
             $entity->getLastName(),
             $entity->getEmail(),
             $entity->getPosition(),
+            $entity->getAvatar(),
             $entity->getTaskIds(),
+            $entity->getStatus(),
             $entity->getCreatedAt(),
         );
 

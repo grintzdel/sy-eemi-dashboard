@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Modules\Employee\Infrastructure\Doctrine\Entities\EmployeeEntity;
+use App\Modules\Shared\Domain\Enums\EmployeeStatus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -40,6 +41,8 @@ final class EmployeeFixtures extends Fixture
 
         for ($i = 1; $i <= 20; ++$i) {
             $createdAt = $this->getRandomDateInLast12Months();
+            $status = $this->faker->boolean(80) ? EmployeeStatus::ACTIVE : EmployeeStatus::INACTIVE;
+            $avatarId = $this->faker->numberBetween(1, 200);
 
             $employee = new EmployeeEntity(
                 id: Uuid::v4()->toString(),
@@ -47,7 +50,9 @@ final class EmployeeFixtures extends Fixture
                 lastName: $this->faker->lastName(),
                 email: $this->faker->unique()->safeEmail(),
                 position: $positions[array_rand($positions)],
+                avatar: "https://picsum.photos/seed/{$avatarId}/200/200",
                 taskIds: [],
+                status: $status,
                 createdAt: $createdAt,
                 updatedAt: $createdAt,
             );
@@ -58,6 +63,7 @@ final class EmployeeFixtures extends Fixture
 
         for ($i = 1; $i <= 3; ++$i) {
             $createdAt = $this->getRandomDateInLast12Months();
+            $avatarId = $this->faker->numberBetween(201, 300);
 
             $deletedEmployee = new EmployeeEntity(
                 id: Uuid::v4()->toString(),
@@ -65,7 +71,9 @@ final class EmployeeFixtures extends Fixture
                 lastName: $this->faker->lastName(),
                 email: $this->faker->unique()->safeEmail(),
                 position: $positions[array_rand($positions)],
+                avatar: "https://picsum.photos/seed/{$avatarId}/200/200",
                 taskIds: [],
+                status: EmployeeStatus::INACTIVE,
                 createdAt: $createdAt,
                 updatedAt: $createdAt,
             );

@@ -14,6 +14,7 @@ use App\Modules\Employee\Application\ViewModels\EmployeeViewModel;
 use App\Modules\Employee\Presentation\State\Processor\CreateEmployeeProcessor;
 use App\Modules\Employee\Presentation\State\Processor\DeleteEmployeeProcessor;
 use App\Modules\Employee\Presentation\State\Processor\UpdateEmployeeProcessor;
+use App\Modules\Employee\Presentation\State\Provider\CountActiveEmployeesProvider;
 use App\Modules\Employee\Presentation\State\Provider\GetEmployeeProvider;
 use App\Modules\Employee\Presentation\State\Provider\ListEmployeesProvider;
 
@@ -23,6 +24,11 @@ use App\Modules\Employee\Presentation\State\Provider\ListEmployeesProvider;
         operations: [
             new GetCollection(provider: ListEmployeesProvider::class),
             new Get(provider: GetEmployeeProvider::class),
+            new Get(
+                uriTemplate: '/employees/active/count',
+                name: 'count_active_employees',
+                provider: CountActiveEmployeesProvider::class,
+            ),
             new Post(processor: CreateEmployeeProcessor::class),
             new Put(processor: UpdateEmployeeProcessor::class),
             new Delete(processor: DeleteEmployeeProcessor::class),

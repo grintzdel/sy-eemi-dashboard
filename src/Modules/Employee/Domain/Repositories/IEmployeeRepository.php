@@ -15,6 +15,8 @@ interface IEmployeeRepository
 
     public function findAll(): array;
 
+    public function countActiveEmployees(): int;
+
     /*
      * Commands
      */
